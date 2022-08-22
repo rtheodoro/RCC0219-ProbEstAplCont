@@ -1,0 +1,50 @@
+---
+title: "Introdução ao R"
+author: "Ricardo Theodoro"
+format: revealjs
+editor: visual
+---
+
+## Ementa
+
+-   Introdução
+-   Apresentando o R
+-   R e RStudio
+-   Trabalhando com projetos
+-   Objetos e funções
+-   Pacotes
+
+## O que é o R?
+
+R é uma linguagem de programação voltada para estatística, desenvolvida por dois pesquisadores do departamento de Estatística da Universidade Auckland, na Nova Zelândia. 
+
+Ela surgiu da necessidade de um programa que auxiliasse na manipulação, análise e visualização de dados de forma gratuíta para que os alunos pudessem acompanhar as aulas.
+
+## Por que utilizar programação para estatística?
+
+-   Acesso gratuito.
+-   Você pode corrigir problemas e aprimorar a linguagem.
+-   Você pode desenvolver suas próprias ferramentas.
+-   Possibilita a existência de uma comunidade ativa.
+-   O código é uma linguagem que possibilita documentação
+-   Fácil replicação
+
+## Por que utilizar programação para estatística?
+
+![Ciclo da ciência de dados](img/ds.png)
+
+## Como fazer isso com o R?
+
+![Ciclo da ciência de dados com o R](img/dsr.png)
+
+## O que é o R?
+
+## Onde continuar estudando?
+
+-   [R for Data Science](https://r4ds.had.co.nz/)
+-   [Zen do R](https://curso-r.github.io/zen-do-r/index.html)
+
+## Onde tirar dúvidas?
+
+-   [Stackoverflow](https://pt.stackoverflow.com/)
+-   [Discourse da Curso R](https://discourse.curso-r.com/)
