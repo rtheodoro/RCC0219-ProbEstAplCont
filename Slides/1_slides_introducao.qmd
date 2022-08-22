@@ -16,7 +16,7 @@ editor: visual
 
 ## O que é o R?
 
-R é uma linguagem de programação voltada para estatística, desenvolvida por dois pesquisadores do departamento de Estatística da Universidade Auckland, na Nova Zelândia. 
+R é uma linguagem de programação voltada para estatística, desenvolvida por dois pesquisadores do departamento de Estatística da Universidade Auckland, na Nova Zelândia.
 
 Ela surgiu da necessidade de um programa que auxiliasse na manipulação, análise e visualização de dados de forma gratuíta para que os alunos pudessem acompanhar as aulas.
 
