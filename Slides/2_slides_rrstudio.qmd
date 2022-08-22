@@ -1,0 +1,124 @@
+---
+title: "R e RStudio"
+author: "Ricardo Theodoro"
+institute: "OBSCOOP/USP"
+format: 
+   revealjs:
+     logo: img/obscoopusp_logo.png
+     slide-number: true
+     show-slide-number: all
+     width: 1280
+     height: 720
+     theme: beige
+editor: visual
+---
+
+## O que é o R?
+
+-   R é uma linguagem de programação voltada para estatística, desenvolvida por dois pesquisadores do departamento de Estatística da Universidade Auckland, na Nova Zelândia.
+
+-   Ela surgiu da necessidade de um programa que auxiliasse na manipulação, análise e visualização de dados de forma gratuíta para que os alunos pudessem acompanhar as aulas.
+
+-   Apesar de ser voltada para estatística, possui uma infinidade de funções, como criação de sites, dashboards, etc...
+
+## Onde baixar o R?
+
+The Comprehensive R Archive Network - <https://cran.r-project.org/>
+
+![CRAN](img/cran-selecionarsistema.png)
+
+## Instalando R no Linux
+
+![CRAN](img/instalando_ubuntu.png)
+
+## Instalando R no Mac
+
+![CRAN](img/instalando_mac.png)
+
+## Instalando R no Windows
+
+![CRAN](img/instalando_windows.png)
+
+## Abrindo o R
+
+Íncone do R:
+
+![Ícone R](img/r_logo.png)
+
+## Abrindo o R
+
+Tela do R:
+
+![Tela do R](img/abrindo_r.png)
+
+## Abrindo o R
+
+Poucas informações, pouco intuítivo, feio
+
+![Tela do R](img/abrindo_r_utilizando.png)
+
+## O que é o RStudio?
+
+-   É uma interface gráfica voltada para programação em R
+
+-   Utiliza de recursos visuais para facilitar a programação
+
+-   Também aceita outras linguagens, como Python
+
+Outras interfaces:
+
+-   [VSCODE](https://code.visualstudio.com/Download)
+
+-   [Jupyter](https://jupyter.org/install)
+
+## Onde baixar o RStudio?
+
+RStudio - <https://www.rstudio.com/>
+
+![RStudio](img/rstudio_site.png)
+
+## Onde baixar o RStudio?
+
+-   Download
+-   Selecionar a versão RStudio Desktop (Free)
+
+![RStudio Desktop (Free)](img/rstudio_download_free.png)
+
+## Onde baixar o RStudio?
+
+-   Download
+-   Selecionar a versão RStudio Desktop (Free)
+
+![RStudio Desktop (Free)](img/rstudio_download_free.png)
+
+## Onde baixar o RStudio?
+
+-   Selecionar o seu sistema
+
+-   Clickar em baixar
+
+-   Instalar
+
+![Selecionar o sistema e baixar](img/rstudio_selecionasistem_baixa.png)
+
+## Interface básica do RStudio
+
+-   Dividida em quatro partes: Scripts, Console/Terminal, Ambiente/Conexões e Arquivos/Visualização
+
+![Interface RStudio](img/rsutido_interface.png)
+
+## Configurando o RStudio
+
+-   Ler [Zen do R](https://curso-r.github.io/zen-do-r/index.html)
+
+-   Acessar: Ferramentas -> Opções Globais
+
+-   Não salvar o histórico, Rdata, etc...
+
+![Configurações](img/rstudio_config.png)
+
+## Configurando a aparência
+
+- Deixar do jeito que te agradar mais
+
+![Configurações](img/rstudio_config_layout.png)
