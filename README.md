@@ -7,7 +7,7 @@ O objetivo deste projeto é ensinar o básico da programação em R para a turma
 
 | **Tema**                 | **Slides**  | **Código** |
 |:-------------------------|:------------|:-----------|
-| Introdução               |  1_slides_introducao    |  1_codigo |
+| Introdução               |  1_slides_introducao    |  - |
 | R e RStudio              |  2_slide     |  1_codigo |
 | Projetos, objetos, funções e pacotes |  3_slide     |  2_codigo |
 | Estatística              |  6_slide     |  5_codigo |
