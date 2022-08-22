@@ -56,3 +56,178 @@ File -> New Project...
 [Ver *cheat sheet*](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
 
 ## Objetos
+
+São nomes que guardam valores.
+
+:::: {.columns}
+::: {.column width="60%"}
+- Variável
+
+```{r}
+#| echo: fenced
+
+# Salvando `1` em `a`
+a <- 1
+# Avaliando o objeto `a`
+a
+
+#| echo: fenced
+
+# Salvando `2` em `A`
+A <- 2
+# Avaliando o objeto `A`
+A
+```
+:::
+::: {.column width="40%"}
+**ATENÇÃO**: 
+
+- o R diferencia letras maiúsculas de minísculas
+
+- Não utilizem caracteres especiais, apenas _
+
+- O nome deve representas sua utilidade
+:::
+::::
+
+## Classes dos Objetos
+
+A classe de um objeto define o tipo de valor armezenado nele.
+
+É a partir dela que as funções e operadores conseguem saber exatamente o que fazer com um objeto.
+
+## Classes dos Objetos
+
+Para saber a classe de um objeto, basta rodarmos class(nome-do-objeto).
+
+```{r}
+#| echo: fenced
+x <- 1
+class(x)
+```
+
+```{r}
+#| echo: fenced
+y <- "a"
+class(y)
+```
+
+```{r}
+#| echo: fenced
+class(mtcars)
+```
+
+```{r}
+#| echo: fenced
+class(TRUE)
+```
+
+## Vetores
+
+Vetores são apenas conjuntos indexados de valores. 
+
+Cada coluna de um data frame será representada como um vetor.
+
+
+```{r}
+#| echo: fenced
+
+vetor_num <- c(1, 2, 3)
+class(vetor_num)
+```
+
+```{r}
+#| echo: fenced
+vetor_letras <- c("a", "b", "c")
+class(vetor_letras)
+```
+
+```{r}
+#| echo: fenced
+vetor_num_letras <- c("a", 3, "c")
+class(vetor_num_letras)
+```
+
+
+## Trabalhando com objetos e vetores
+
+- Criando sequência
+
+```{r}
+#| echo: fenced
+vetor_1a10 <- 1:10
+```
+
+```{r}
+#| echo: fenced
+vetor_10a1 <- 10:1
+```
+
+```{r}
+#| echo: fenced
+vetor_10a1[3] # Peguando um número na sequência
+```
+
+
+```{r}
+#| echo: fenced
+vetor_10a1[3:7] # Extraindo valor de um conjunto
+```
+
+## Operações com vetores
+
+```{r}
+#| echo: fenced
+vetor_10a1 + 6
+```
+
+```{r}
+#| echo: fenced
+vetor_10a1 + vetor_num # Reparem que como um vetor é menor que o outro, o R recicla a diferença
+```
+
+
+## Pertence
+
+Como verificar se um valor está dentro de um vetor?
+
+```{r}
+#| echo: fenced
+vetor_num %in% vetor_1a10
+```
+
+## Funções
+
+São nomes que guardam um código de R.
+
+Sempre que você precisar repetir um trecho de código para realizar uma tarefa, você deve criar uma função e utilizá-lá.
+
+
+Exemplo: função soma
+
+```{r}
+#| echo: fenced
+sum(a+A)
+```
+
+Os valores dentro do parênteses da função são chamados de argumentos e serão utilizados como parâmetros para cálculo do resultado.
+
+## Criando Funções
+
+Podemos criar nosas próprias funções
+
+```{r}
+#| echo: fenced
+
+
+soma_3_divide_2 <- function(valor1){
+   
+   resultado <- (({{ valor1 }}) + 3)/ 2
+   
+   print(resultado)
+}
+
+soma_3_divide_2(7)
+
+```
+
