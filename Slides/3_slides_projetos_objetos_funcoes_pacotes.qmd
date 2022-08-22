@@ -1,0 +1,58 @@
+---
+title: "Projetos, Objetos, Funções e Pacotes"
+author: "Ricardo Theodoro"
+institute: "OBSCOOP/USP"
+format: 
+   revealjs:
+     logo: img/obscoopusp_logo.png
+     slide-number: true
+     show-slide-number: all
+     width: 1280
+     height: 720
+     theme: beige
+editor: visual
+---
+
+## Projetos
+
+O que é um projeto?
+
+- Um projeto é uma pasta no seu computador em que estarão todos os arquivos que você usurá ou criará na sua análise.
+
+Por que criar um projeto?
+
+- Organização!
+
+
+## Como criar um Projeto?
+
+File -> New Project...
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+![](img/rstudio_newproject.png)
+
+:::
+
+::: {.column width="60%"}
+**New Directory** -> Cria o pojeto em uma pasta nova
+
+**Existing Directory** -> Cria o projeto em uma pasta existente
+
+**Version Control** -> Baixa um projeto do Github, por exemplo
+:::
+
+:::: 
+
+## Verificando o Projetos
+
+![](img/rstudio_projeto.png)
+
+## Mais informações sobre Projetos
+![](img/rstudio_cheatsheet.png)
+
+[Ver *cheat sheet*](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
+
+## Objetos
