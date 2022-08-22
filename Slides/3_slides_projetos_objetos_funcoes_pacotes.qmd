@@ -231,3 +231,7 @@ soma_3_divide_2(7)
 
 ```
 
+# Pacotes
+
+O que são pacotes?
+
