@@ -18,7 +18,7 @@ editor: visual
 -   Introdução
 -   Apresentando o R e o RStudio
 -   Projetos, Objetos, Funções e Pacotes
--   Estatística
+-   Importação, Tratamento e Estatística
 -   Visualização
 
 ## O que é o R?

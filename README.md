@@ -7,11 +7,14 @@ O objetivo deste projeto é ensinar o básico da programação em R para a turma
 
 | **Tema**                 | **Slides**  | **Código** |
 |:-------------------------|:------------|:-----------|
-| Introdução               |  1_slides_introducao    |  - |
-| R e RStudio              |  2_slide_rrstudio     |  - |
+| Introdução               |  [1_slides_introducao](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Slides/2_slides_rrstudio.html)    |  - |
+| R e RStudio              |  [2_slide_rrstudio](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Slides/2_slides_rrstudio.html)     |  - |
 | Projetos, objetos, funções e pacotes |  3_slide     |  2_codigo |
-| Estatística              |  6_slide     |  5_codigo |
+| Importação, Tratamento e Estatística              |  6_slide     |  5_codigo |
 | Visualização             |  6_slide     |  6_codigo | 
+
+Os Slides estão na pasta `Slides` e com a extenção `.html`.
+Os Códigos estão na pasta `Codigos`.
 
 ## Referências
 
