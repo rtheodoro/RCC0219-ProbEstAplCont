@@ -321,23 +321,25 @@
 <section id="title-slide" class="center">
   <h1 class="title">Introdução ao R</h1>
   <p class="author">Ricardo Theodoro</p>
+  <p class="institute">OBSCOOP/USP</p>
 </section>
 
 <section id="ementa" class="slide level2">
 <h2>Ementa</h2>
 <ul>
 <li>Introdução</li>
-<li>Apresentando o R</li>
-<li>R e RStudio</li>
-<li>Trabalhando com projetos</li>
-<li>Objetos e funções</li>
-<li>Pacotes</li>
+<li>Apresentando o R e o RStudio</li>
+<li>Projetos, Objetos, Funções e Pacotes</li>
+<li>Estatística</li>
+<li>Visualização</li>
 </ul>
 </section>
 <section id="o-que-é-o-r" class="slide level2">
 <h2>O que é o R?</h2>
-<p>R é uma linguagem de programação voltada para estatística, desenvolvida por dois pesquisadores do departamento de Estatística da Universidade Auckland, na Nova Zelândia.</p>
-<p>Ela surgiu da necessidade de um programa que auxiliasse na manipulação, análise e visualização de dados de forma gratuíta para que os alunos pudessem acompanhar as aulas.</p>
+<ul>
+<li><p>R é uma linguagem de programação voltada para estatística, desenvolvida por dois pesquisadores do departamento de Estatística da Universidade Auckland, na Nova Zelândia.</p></li>
+<li><p>Ela surgiu da necessidade de um programa que auxiliasse na manipulação, análise e visualização de dados de forma gratuíta para que os alunos pudessem acompanhar as aulas.</p></li>
+</ul>
 </section>
 <section id="por-que-utilizar-programação-para-estatística" class="slide level2">
 <h2>Por que utilizar programação para estatística?</h2>
@@ -358,9 +360,6 @@
 <h2>Como fazer isso com o R?</h2>
 
 <img data-src="img/dsr.png" class="r-stretch quarto-figure-center"><p class="caption">Ciclo da ciência de dados com o R</p></section>
-<section id="o-que-é-o-r-1" class="slide level2">
-<h2>O que é o R?</h2>
-</section>
 <section id="onde-continuar-estudando" class="slide level2">
 <h2>Onde continuar estudando?</h2>
 <ul>
@@ -374,7 +373,8 @@
 <li><a href="https://pt.stackoverflow.com/">Stackoverflow</a></li>
 <li><a href="https://discourse.curso-r.com/">Discourse da Curso R</a></li>
 </ul>
-<div class="footer footer-default">
+
+<img src="img/obscoopusp_logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
 </div>
 </section>
@@ -430,7 +430,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -555,9 +555,9 @@
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1280,
 
-        height: 700,
+        height: 720,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,

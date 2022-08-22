@@ -1,0 +1,10 @@
+#title-slide{
+   background-color: lightgray;
+}
+section#title-slide{
+      height: 100%;
+}
+.reveal #title-slide h1{
+   color: purple;
+   margin-top: 25%;
+}

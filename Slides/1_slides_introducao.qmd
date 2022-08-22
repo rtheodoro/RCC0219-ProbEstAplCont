@@ -1,24 +1,31 @@
 ---
 title: "Introdução ao R"
 author: "Ricardo Theodoro"
-format: revealjs
+institute: "OBSCOOP/USP"
+format: 
+   revealjs:
+     logo: img/obscoopusp_logo.png
+     slide-number: true
+     show-slide-number: all
+     width: 1280
+     height: 720
+     theme: beige
 editor: visual
 ---
 
 ## Ementa
 
 -   Introdução
--   Apresentando o R
--   R e RStudio
--   Trabalhando com projetos
--   Objetos e funções
--   Pacotes
+-   Apresentando o R e o RStudio
+-   Projetos, Objetos, Funções e Pacotes
+-   Estatística
+-   Visualização
 
 ## O que é o R?
 
-R é uma linguagem de programação voltada para estatística, desenvolvida por dois pesquisadores do departamento de Estatística da Universidade Auckland, na Nova Zelândia.
+- R é uma linguagem de programação voltada para estatística, desenvolvida por dois pesquisadores do departamento de Estatística da Universidade Auckland, na Nova Zelândia.
 
-Ela surgiu da necessidade de um programa que auxiliasse na manipulação, análise e visualização de dados de forma gratuíta para que os alunos pudessem acompanhar as aulas.
+- Ela surgiu da necessidade de um programa que auxiliasse na manipulação, análise e visualização de dados de forma gratuíta para que os alunos pudessem acompanhar as aulas.
 
 ## Por que utilizar programação para estatística?
 
@@ -36,8 +43,6 @@ Ela surgiu da necessidade de um programa que auxiliasse na manipulação, análi
 ## Como fazer isso com o R?
 
 ![Ciclo da ciência de dados com o R](img/dsr.png)
-
-## O que é o R?
 
 ## Onde continuar estudando?
 
