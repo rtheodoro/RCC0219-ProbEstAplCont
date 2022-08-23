@@ -11,6 +11,12 @@ format:
      width: 1280
      height: 720
      theme: default
+   beamer:
+     slide-number: true
+     show-slide-number: all
+     preview-links: auto
+     aspectratio: 169
+     theme: Luebeck
 editor: visual
 execute:
   echo: true
@@ -44,7 +50,7 @@ The Comprehensive R Archive Network - <https://cran.r-project.org/>
 
 ## Abrindo o R
 
-Íncone do R:
+Ícone do R:
 
 ![Ícone R](img/r_logo.png)
 

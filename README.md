@@ -7,13 +7,13 @@ O objetivo deste projeto é ensinar o básico da programação em R para a turma
 
 | **Tema**                 | **Slides**  | **Código** |
 |:-------------------------|:------------|:-----------|
-| Introdução               |  [1_slides_introducao.html](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Slides/2_slides_rrstudio.html)    |  - |
-| R e RStudio              |  [2_slide_rrstudio.html](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Slides/2_slides_rrstudio.html)     |  - |
-| Projetos, objetos, funções e pacotes |  [3_slides_projetos_objetos_funcoes_pacotes.html](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Slides/3_slides_projetos_objetos_funcoes_pacotes.html)     |  [3_codigo_projetos_objetos_funcoes_pacotes](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Codigo/3_codigos_projetos_objetos_funcoes_pacotes.R) |
+| Introdução               |  [1_slides_introducao.pdf](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Slides/2_slides_rrstudio.pdf)    |  - |
+| R e RStudio              |  [2_slide_rrstudio.pdf](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Slides/2_slides_rrstudio.pdf)     |  - |
+| Projetos, objetos, funções e pacotes |  [3_slides_projetos_objetos_funcoes_pacotes.pdf](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Slides/3_slides_projetos_objetos_funcoes_pacotes.pdf)     |  [3_codigo_projetos_objetos_funcoes_pacotes](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Codigo/3_codigos_projetos_objetos_funcoes_pacotes.R) |
 | Importação, Tratamento e Estatística              |  4_slide     |  4_codigo |
 | Visualização             |  5_slide     |  5_codigo | 
 
-Os Slides estão na pasta `Slides` e com a extenção `.html`.
+Os Slides originais estão na pasta `Slides` e com a extenção `.html`.
 Os Códigos estão na pasta `Codigos`.
 
 ## Referências

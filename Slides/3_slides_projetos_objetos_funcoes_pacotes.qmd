@@ -11,6 +11,12 @@ format:
      width: 1280
      height: 720
      theme: default
+   beamer:
+     slide-number: true
+     show-slide-number: all
+     preview-links: auto
+     aspectratio: 169
+     theme: Luebeck
 editor: visual
 execute:
   echo: true
