@@ -10,7 +10,7 @@ format:
      preview-links: auto
      width: 1280
      height: 720
-     theme: beige
+     theme: default
 editor: visual
 execute:
   echo: true
