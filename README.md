@@ -9,7 +9,7 @@ O objetivo deste projeto é ensinar o básico da programação em R para a turma
 |:-------------------------|:------------|:-----------|
 | Introdução               |  [1_slides_introducao.html](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Slides/2_slides_rrstudio.html)    |  - |
 | R e RStudio              |  [2_slide_rrstudio.html](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Slides/2_slides_rrstudio.html)     |  - |
-| Projetos, objetos, funções e pacotes |  [3_slides_projetos_objetos_funcoes_pacotes.html](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Slides/3_slides_projetos_objetos_funcoes_pacotes)     |  [3_codigo_projetos_objetos_funcoes_pacotes](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Codigo/3_codigos_projetos_objetos_funcoes_pacotes.R) |
+| Projetos, objetos, funções e pacotes |  [3_slides_projetos_objetos_funcoes_pacotes.html](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Slides/3_slides_projetos_objetos_funcoes_pacotes.html)     |  [3_codigo_projetos_objetos_funcoes_pacotes](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Codigo/3_codigos_projetos_objetos_funcoes_pacotes.R) |
 | Importação, Tratamento e Estatística              |  4_slide     |  4_codigo |
 | Visualização             |  5_slide     |  5_codigo | 
 
