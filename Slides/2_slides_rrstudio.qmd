@@ -7,10 +7,13 @@ format:
      logo: img/obscoopusp_logo.png
      slide-number: true
      show-slide-number: all
+     preview-links: auto
      width: 1280
      height: 720
      theme: beige
 editor: visual
+execute:
+  echo: true
 ---
 
 ## O que é o R?
@@ -109,16 +112,20 @@ RStudio - <https://www.rstudio.com/>
 
 ## Configurando o RStudio
 
--   Ler [Zen do R](https://curso-r.github.io/zen-do-r/index.html)
++------------------------------------------+-------------------------------------------------------------------+
+| ![Configurações](img/rstudio_config.png) | -   Ler [Zen do R](https://curso-r.github.io/zen-do-r/index.html) |
+|                                          |                                                                   |
+|                                          | <!-- -->                                                          |
+|                                          |                                                                   |
+|                                          | -   Acessar: Ferramentas -\> Opções Globais                       |
+|                                          |                                                                   |
+|                                          | -   Não salvar o RData, histórico, etc...                         |
++------------------------------------------+-------------------------------------------------------------------+
 
--   Acessar: Ferramentas -> Opções Globais
-
--   Não salvar o histórico, Rdata, etc...
-
-![Configurações](img/rstudio_config.png)
++==========================================+===================================================================+ +------------------------------------------+-------------------------------------------------------------------+
 
 ## Configurando a aparência
 
-- Deixar do jeito que te agradar mais
+-   Deixar do jeito que te agradar mais
 
 ![Configurações](img/rstudio_config_layout.png)

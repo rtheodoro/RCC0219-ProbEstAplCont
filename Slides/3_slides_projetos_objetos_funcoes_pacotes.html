@@ -7,7 +7,7 @@
 <link href="3_slides_projetos_objetos_funcoes_pacotes_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="3_slides_projetos_objetos_funcoes_pacotes_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="3_slides_projetos_objetos_funcoes_pacotes_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.37">
+  <meta name="generator" content="quarto-1.0.38">
 
   <meta name="author" content="Ricardo Theodoro">
   <title>Projetos, Objetos, Funções e Pacotes</title>
@@ -430,22 +430,19 @@
 <li>Variável</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="in">```{r}</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># Salvando `1` em `a`</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Avaliando o objeto `a`</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>a</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co">#| echo: fenced</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Salvando `2` em `A`</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>A <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># Avaliando o objeto `A`</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>A</span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Salvando `1` em `a`</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Avaliando o objeto `a`</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1
-[1] 2</code></pre>
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Salvando `2` em `A`</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>A <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># Avaliando o objeto `A`</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:40%;">
@@ -453,7 +450,7 @@
 <ul>
 <li><p>o R diferencia letras maiúsculas de minísculas</p></li>
 <li><p>Não utilizem caracteres especiais, apenas _</p></li>
-<li><p>O nome deve representas sua utilidade</p></li>
+<li><p>O nome deve representar sua utilidade ou função</p></li>
 </ul>
 </div>
 </div>
@@ -467,35 +464,27 @@
 <h2>Classes dos Objetos</h2>
 <p>Para saber a classe de um objeto, basta rodarmos class(nome-do-objeto).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">class</span>(x)</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">class</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a><span class="in">```{r}</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>y <span class="ot">&lt;-</span> <span class="st">"a"</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">class</span>(y)</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>y <span class="ot">&lt;-</span> <span class="st">"a"</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">class</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">class</span>(mtcars)</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">class</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "data.frame"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">class</span>(<span class="cn">TRUE</span>)</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">class</span>(<span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "logical"</code></pre>
 </div>
@@ -506,28 +495,22 @@
 <p>Vetores são apenas conjuntos indexados de valores.</p>
 <p>Cada coluna de um data frame será representada como um vetor.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>vetor_num <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="fu">class</span>(vetor_num)</span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>vetor_num <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">class</span>(vetor_num)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>vetor_letras <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">class</span>(vetor_letras)</span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>vetor_letras <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">class</span>(vetor_letras)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1"></a><span class="in">```{r}</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>vetor_num_letras <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="dv">3</span>, <span class="st">"c"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="fu">class</span>(vetor_num_letras)</span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>vetor_num_letras <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="dv">3</span>, <span class="st">"c"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">class</span>(vetor_num_letras)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
@@ -539,27 +522,19 @@
 <li>Criando sequência</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>vetor_1a10 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>vetor_1a10 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>vetor_10a1 <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">:</span><span class="dv">1</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>vetor_10a1 <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">:</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1"></a><span class="in">```{r}</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>vetor_10a1[<span class="dv">3</span>] <span class="co"># Peguando um número na sequência</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>vetor_10a1[<span class="dv">3</span>] <span class="co"># Peguando um número na sequência</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>vetor_10a1[<span class="dv">3</span><span class="sc">:</span><span class="dv">7</span>] <span class="co"># Extraindo valor de um conjunto</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>vetor_10a1[<span class="dv">3</span><span class="sc">:</span><span class="dv">7</span>] <span class="co"># Extraindo valor de um conjunto</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8 7 6 5 4</code></pre>
 </div>
@@ -568,29 +543,26 @@
 <section id="operações-com-vetores" class="slide level2">
 <h2>Operações com vetores</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>vetor_10a1 <span class="sc">+</span> <span class="dv">6</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>vetor_10a1 <span class="sc">+</span> <span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 16 15 14 13 12 11 10  9  8  7</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb25-1"><a href="#cb25-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>vetor_10a1 <span class="sc">+</span> vetor_num <span class="co"># Reparem que como um vetor é menor que o outro, o R recicla a diferença</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>vetor_10a1 <span class="sc">+</span> vetor_num </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 11 11 11  8  8  8  5  5  5  2</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Reparem que como um vetor é menor que o outro, o R recicla a diferença</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="pertence" class="slide level2">
 <h2>Pertence</h2>
 <p>Como verificar se um valor está dentro de um vetor?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb27-1"><a href="#cb27-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>vetor_num <span class="sc">%in%</span> vetor_1a10</span>
-<span id="cb27-3"><a href="#cb27-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="#cb30-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>vetor_num <span class="sc">%in%</span> vetor_1a10</span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE TRUE TRUE</code></pre>
 </div>
@@ -602,14 +574,37 @@
 <p>Sempre que você precisar repetir um trecho de código para realizar uma tarefa, você deve criar uma função e utilizá-lá.</p>
 <p>Exemplo: função soma</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="#cb29-1"></a><span class="in">```{r}</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">sum</span>(a<span class="sc">+</span>A)</span>
-<span id="cb29-3"><a href="#cb29-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb32-1"><a href="#cb32-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">sum</span>(a<span class="sc">+</span>A)</span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>Os valores dentro do parênteses da função são chamados de argumentos e serão utilizados como parâmetros para cálculo do resultado.</p>
+</section>
+<section id="criando-funções" class="slide level2">
+<h2>Criando Funções</h2>
+<p>Podemos criar nosas próprias funções</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb34-1"><a href="#cb34-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>soma_3_divide_2 <span class="ot">&lt;-</span> <span class="cf">function</span>(valor1){</span>
+<span id="cb34-3"><a href="#cb34-3"></a>   </span>
+<span id="cb34-4"><a href="#cb34-4"></a>   resultado <span class="ot">&lt;-</span> (({{ valor1 }}) <span class="sc">+</span> <span class="dv">3</span>)<span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a>   </span>
+<span id="cb34-6"><a href="#cb34-6"></a>   <span class="fu">print</span>(resultado)</span>
+<span id="cb34-7"><a href="#cb34-7"></a>}</span>
+<span id="cb34-8"><a href="#cb34-8"></a></span>
+<span id="cb34-9"><a href="#cb34-9"></a><span class="fu">soma_3_divide_2</span>(<span class="dv">7</span>)</span>
+<span id="cb34-10"><a href="#cb34-10"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+</section>
+<section id="pacotes" class="title-slide slide level1 center">
+<h1>Pacotes</h1>
+<p>O que são pacotes?</p>
 
 <img src="img/obscoopusp_logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
@@ -640,7 +635,7 @@
       // https://revealjs.com/config/
       Reveal.initialize({
 'controlsAuto': true,
-'previewLinksAuto': false,
+'previewLinksAuto': true,
 'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",

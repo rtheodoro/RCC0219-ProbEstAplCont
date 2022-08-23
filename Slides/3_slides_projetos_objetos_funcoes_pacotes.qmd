@@ -7,50 +7,49 @@ format:
      logo: img/obscoopusp_logo.png
      slide-number: true
      show-slide-number: all
+     preview-links: auto
      width: 1280
      height: 720
      theme: beige
 editor: visual
+execute:
+  echo: true
 ---
 
 ## Projetos
 
 O que é um projeto?
 
-- Um projeto é uma pasta no seu computador em que estarão todos os arquivos que você usurá ou criará na sua análise.
+-   Um projeto é uma pasta no seu computador em que estarão todos os arquivos que você usurá ou criará na sua análise.
 
 Por que criar um projeto?
 
-- Organização!
-
+-   Organização!
 
 ## Como criar um Projeto?
 
-File -> New Project...
+File -\> New Project...
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="40%"}
-
 ![](img/rstudio_newproject.png)
-
 :::
 
 ::: {.column width="60%"}
-**New Directory** -> Cria o pojeto em uma pasta nova
+**New Directory** -\> Cria o pojeto em uma pasta nova
 
-**Existing Directory** -> Cria o projeto em uma pasta existente
+**Existing Directory** -\> Cria o projeto em uma pasta existente
 
-**Version Control** -> Baixa um projeto do Github, por exemplo
+**Version Control** -\> Baixa um projeto do Github, por exemplo
 :::
-
-:::: 
+:::
 
 ## Verificando o Projetos
 
 ![](img/rstudio_projeto.png)
 
 ## Mais informações sobre Projetos
+
 ![](img/rstudio_cheatsheet.png)
 
 [Ver *cheat sheet*](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
@@ -59,19 +58,15 @@ File -> New Project...
 
 São nomes que guardam valores.
 
-:::: {.columns}
+::: columns
 ::: {.column width="60%"}
-- Variável
+-   Variável
 
 ```{r}
-#| echo: fenced
-
 # Salvando `1` em `a`
 a <- 1
 # Avaliando o objeto `a`
 a
-
-#| echo: fenced
 
 # Salvando `2` em `A`
 A <- 2
@@ -79,16 +74,17 @@ A <- 2
 A
 ```
 :::
+
 ::: {.column width="40%"}
-**ATENÇÃO**: 
+**ATENÇÃO**:
 
-- o R diferencia letras maiúsculas de minísculas
+-   o R diferencia letras maiúsculas de minísculas
 
-- Não utilizem caracteres especiais, apenas _
+-   Não utilizem caracteres especiais, apenas \_
 
-- O nome deve representas sua utilidade
+-   O nome deve representar sua utilidade ou função
 :::
-::::
+:::
 
 ## Classes dos Objetos
 
@@ -101,91 +97,74 @@ A classe de um objeto define o tipo de valor armezenado nele.
 Para saber a classe de um objeto, basta rodarmos class(nome-do-objeto).
 
 ```{r}
-#| echo: fenced
 x <- 1
 class(x)
 ```
 
 ```{r}
-#| echo: fenced
 y <- "a"
 class(y)
 ```
 
 ```{r}
-#| echo: fenced
 class(mtcars)
 ```
 
 ```{r}
-#| echo: fenced
 class(TRUE)
 ```
 
 ## Vetores
 
-Vetores são apenas conjuntos indexados de valores. 
+Vetores são apenas conjuntos indexados de valores.
 
 Cada coluna de um data frame será representada como um vetor.
 
-
 ```{r}
-#| echo: fenced
-
 vetor_num <- c(1, 2, 3)
 class(vetor_num)
 ```
 
 ```{r}
-#| echo: fenced
 vetor_letras <- c("a", "b", "c")
 class(vetor_letras)
 ```
 
 ```{r}
-#| echo: fenced
 vetor_num_letras <- c("a", 3, "c")
 class(vetor_num_letras)
 ```
 
-
 ## Trabalhando com objetos e vetores
 
-- Criando sequência
+-   Criando sequência
 
 ```{r}
-#| echo: fenced
 vetor_1a10 <- 1:10
 ```
 
 ```{r}
-#| echo: fenced
 vetor_10a1 <- 10:1
 ```
 
 ```{r}
-#| echo: fenced
 vetor_10a1[3] # Peguando um número na sequência
 ```
 
-
 ```{r}
-#| echo: fenced
 vetor_10a1[3:7] # Extraindo valor de um conjunto
 ```
 
 ## Operações com vetores
 
 ```{r}
-#| echo: fenced
 vetor_10a1 + 6
 ```
 
 ```{r}
-#| echo: fenced
-vetor_10a1 + vetor_num # Reparem que como um vetor é menor que o outro, o R recicla a diferença
+vetor_10a1 + vetor_num 
+# Reparem que como um vetor é menor que o outro, o R recicla a diferença
 ```
-
 
 ## Pertence
 
@@ -201,7 +180,6 @@ vetor_num %in% vetor_1a10
 São nomes que guardam um código de R.
 
 Sempre que você precisar repetir um trecho de código para realizar uma tarefa, você deve criar uma função e utilizá-lá.
-
 
 Exemplo: função soma
 
@@ -234,4 +212,3 @@ soma_3_divide_2(7)
 # Pacotes
 
 O que são pacotes?
-
