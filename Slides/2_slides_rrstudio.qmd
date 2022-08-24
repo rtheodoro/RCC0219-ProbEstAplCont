@@ -120,15 +120,10 @@ RStudio - <https://www.rstudio.com/>
 
 +------------------------------------------+-------------------------------------------------------------------+
 | ![Configurações](img/rstudio_config.png) | -   Ler [Zen do R](https://curso-r.github.io/zen-do-r/index.html) |
-|                                          |                                                                   |
-|                                          | <!-- -->                                                          |
-|                                          |                                                                   |
 |                                          | -   Acessar: Ferramentas -\> Opções Globais                       |
-|                                          |                                                                   |
 |                                          | -   Não salvar o RData, histórico, etc...                         |
 +------------------------------------------+-------------------------------------------------------------------+
 
-+==========================================+===================================================================+ +------------------------------------------+-------------------------------------------------------------------+
 
 ## Configurando a aparência
 
@@ -148,8 +143,9 @@ RStudio - <https://www.rstudio.com/>
 ::: {.column width="40%"}
 Criar um script:
 
-- File -> New File -> R Script (Ctrl+Shift+n)
+-   File -\> New File -\> R Script (Ctrl+Shift+n)
 :::
+
 ::: {.column width="60%"}
 ```{r}
 # Soma
@@ -210,6 +206,7 @@ tabela <- data.frame(letras = LETTERS[1:10],
 tabela
 ```
 :::
+
 ::: {.column width="30%"}
 -   Cada coluna é uma variável
 -   Cada linha é uma observação
