@@ -63,3 +63,5 @@ execute:
 
 -   [Stackoverflow](https://pt.stackoverflow.com/)
 -   [Discourse da Curso R](https://discourse.curso-r.com/)
+-   Na própria documentação do R
+    - ?sum

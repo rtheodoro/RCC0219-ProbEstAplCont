@@ -38,7 +38,9 @@ File -\> New Project...
 
 ::: columns
 ::: {.column width="40%"}
+
 ![](img/rstudio_newproject.png)
+
 :::
 
 ::: {.column width="60%"}
@@ -54,11 +56,6 @@ File -\> New Project...
 
 ![](img/rstudio_projeto.png)
 
-## Mais informações sobre Projetos
-
-![](img/rstudio_cheatsheet.png)
-
-[Ver *cheat sheet*](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
 
 ## Objetos
 
@@ -66,8 +63,8 @@ São nomes que guardam valores.
 
 ::: columns
 ::: {.column width="60%"}
--   Variável
 
+-   Variável
 ```{r}
 # Salvando `1` em `a`
 a <- 1
@@ -84,11 +81,11 @@ A
 ::: {.column width="40%"}
 **ATENÇÃO**:
 
--   o R diferencia letras maiúsculas de minísculas
+-   O R diferencia letras maiúsculas de minísculas
 
 -   Não utilizem caracteres especiais, apenas \_
 
--   O nome deve representar sua utilidade ou função
+-   O nome deve representar seu valor
 :::
 :::
 
@@ -177,7 +174,7 @@ vetor_10a1 + vetor_num
 Como verificar se um valor está dentro de um vetor?
 
 ```{r}
-#| echo: fenced
+c(1, 2, 3) %in% vetor_1a10
 vetor_num %in% vetor_1a10
 ```
 
@@ -190,8 +187,9 @@ Sempre que você precisar repetir um trecho de código para realizar uma tarefa,
 Exemplo: função soma
 
 ```{r}
-#| echo: fenced
-sum(a+A)
+sum(a, A)
+# sum() é a função
+# a e A são os argumentos da função
 ```
 
 Os valores dentro do parênteses da função são chamados de argumentos e serão utilizados como parâmetros para cálculo do resultado.
@@ -201,20 +199,58 @@ Os valores dentro do parênteses da função são chamados de argumentos e serã
 Podemos criar nosas próprias funções
 
 ```{r}
-#| echo: fenced
-
-
-soma_3_divide_2 <- function(valor1){
+soma_3_divide_2 <- function(valor){
    
-   resultado <- (({{ valor1 }}) + 3)/ 2
+   ({{ valor }} + 3) / 2
    
-   print(resultado)
 }
 
 soma_3_divide_2(7)
-
+soma_3_divide_2(18)
+soma_3_divide_2(9)
 ```
+Cada função deve realizar apenas uma tarefa!
 
-# Pacotes
+## Pacotes
 
 O que são pacotes?
+
+- São conjuntos de funções 
+- Existem muitos pacotes já criados que facilitam a programação
+
+Ex: Pacote `dplyr`. Pacote muito usado para tratamento de dados, como selecionar variáveis,
+filtrar valor, unir data.frames.
+
+
+## Como instalar pacotes
+
+Todo pacote precisa ser instalado uma vez
+
+```{r}
+install.packages("dplyr")
+```
+
+## Como chamar pacotes
+
+Sempre, antes de usar, é preciso chamar o pacote
+
+Duas formas de chamar:
+
+1. Carregar todas as funções presentes no pacote
+```{r}
+library(dplyr)
+mtcars |>
+   select(cyl, mpg) |>
+   filter(mpg > 33)
+```
+
+## Como chamar pacotes
+
+2. Carregar apenas a função chamada, durante seu uso
+```{r}
+#pacote::funcao()
+
+mtcars |>
+   dplyr::select(cyl, mpg) |>
+   dplyr::filter(mpg > 33)
+```

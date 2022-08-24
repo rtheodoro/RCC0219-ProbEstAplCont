@@ -10,7 +10,7 @@
 # -------------------------------------------------------------------------
 
 
-## Objetos
+## Objetos ----
 
 # São letras ou palavras criadas para receberem valor
 
@@ -31,7 +31,7 @@ a
 # - O nome deve representas sua utilidade
 
 
-## Vetores
+## Vetores ----
 #
 # Vetores são apenas conjuntos indexados de valores.
 #
@@ -56,13 +56,13 @@ vetor_10a1 <- 10:1
 
 vetor_10a1[3]
 
-## Pertence
+## Pertence ----
 
 # Como verificar se um valor está dentro de um vetor?
 
 vetor_num %in% vetor_1a10
 
-# Funções
+# Funções ----
 ## Funções
 
 # São nomes que guardam um código de R.
@@ -82,9 +82,32 @@ sum(a+A)
 
 soma_3_divide_2 <- function(valor1){
 
-   resultado <- (({{ valor1 }}) + 3)/ 2
+   (valor1 + 3) / 2
 
-   print(resultado)
 }
 
 soma_3_divide_2(7)
+
+# Como chamar pacotes ----
+
+# Duas formas:
+
+#   1. `library(dplyr)` -> carrega todas as funções presentes no pacote
+
+library(dplyr)
+mtcars |>
+   select(cyl, mpg) |>
+   filter(mpg > 33)
+
+
+# 2. `dplyr::select()` -> carrega apenas a função chamada, durante este uso
+
+mtcars |>
+   dplyr::select(cyl, mpg) |>
+   dplyr::filter(mpg > 33)
+
+
+
+
+
+

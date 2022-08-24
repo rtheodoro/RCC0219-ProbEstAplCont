@@ -135,3 +135,84 @@ RStudio - <https://www.rstudio.com/>
 -   Deixar do jeito que te agradar mais
 
 ![Configurações](img/rstudio_config_layout.png)
+
+## Mais informações sobre Projetos
+
+![](img/rstudio_cheatsheet.png)
+
+[Ver *cheat sheet*](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
+
+## Operações básicas com o R no RStudio
+
+::: columns
+::: {.column width="40%"}
+Criar um script:
+
+- File -> New File -> R Script (Ctrl+Shift+n)
+:::
+::: {.column width="60%"}
+```{r}
+# Soma
+1 + 1
+```
+
+```{r}
+# Subtração
+1 - 1
+```
+
+```{r}
+# Multiplicação
+1 * 1
+```
+
+```{r}
+# Divisão
+1 / 1
+```
+:::
+:::
+
+## Criando variáveis
+
+```{r}
+# Numérica
+numero <- 1
+numero
+```
+
+```{r}
+letra <- "a"
+letra
+```
+
+## Criando vetores
+
+```{r}
+# Vetor numérico
+numeros <- c(1, 2, 3)
+numeros
+```
+
+```{r}
+# Vetor de caracteres
+letras <- c("a", "b", "c")
+letras
+```
+
+## Criando um data.frame
+
+::: columns
+::: {.column width="70%"}
+```{r}
+tabela <- data.frame(letras = LETTERS[1:10], 
+                     numeros = seq(1:10))
+tabela
+```
+:::
+::: {.column width="30%"}
+-   Cada coluna é uma variável
+-   Cada linha é uma observação
+-   Cada célula é um valor
+:::
+:::
