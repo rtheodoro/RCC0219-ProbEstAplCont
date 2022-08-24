@@ -27,8 +27,8 @@ execute:
 -   Introdução
 -   Apresentando o R e o RStudio
 -   Projetos, Objetos, Funções e Pacotes
--   Importação, Tratamento e Estatística
--   Visualização
+-   Importação e Tratamento  
+-   Estatística e Visualização
 
 ## O que é o R?
 
@@ -64,4 +64,4 @@ execute:
 -   [Stackoverflow](https://pt.stackoverflow.com/)
 -   [Discourse da Curso R](https://discourse.curso-r.com/)
 -   Na própria documentação do R
-    - ?sum
+    -   ?sum

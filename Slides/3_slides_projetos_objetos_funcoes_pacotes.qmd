@@ -38,9 +38,7 @@ File -\> New Project...
 
 ::: columns
 ::: {.column width="40%"}
-
 ![](img/rstudio_newproject.png)
-
 :::
 
 ::: {.column width="60%"}
@@ -56,15 +54,14 @@ File -\> New Project...
 
 ![](img/rstudio_projeto.png)
 
-
 ## Objetos
 
 São nomes que guardam valores.
 
 ::: columns
 ::: {.column width="60%"}
-
 -   Variável
+
 ```{r}
 # Salvando `1` em `a`
 a <- 1
@@ -209,18 +206,17 @@ soma_3_divide_2(7)
 soma_3_divide_2(18)
 soma_3_divide_2(9)
 ```
+
 Cada função deve realizar apenas uma tarefa!
 
 ## Pacotes
 
 O que são pacotes?
 
-- São conjuntos de funções 
-- Existem muitos pacotes já criados que facilitam a programação
+-   São conjuntos de funções
+-   Existem muitos pacotes já criados que facilitam a programação
 
-Ex: Pacote `dplyr`. Pacote muito usado para tratamento de dados, como selecionar variáveis,
-filtrar valor, unir data.frames.
-
+Ex: Pacote `dplyr`. Pacote muito usado para tratamento de dados, como selecionar variáveis, filtrar valor, unir data.frames.
 
 ## Como instalar pacotes
 
@@ -236,7 +232,8 @@ Sempre, antes de usar, é preciso chamar o pacote
 
 Duas formas de chamar:
 
-1. Carregar todas as funções presentes no pacote
+1.  Carregar todas as funções presentes no pacote
+
 ```{r}
 library(dplyr)
 mtcars |>
@@ -246,7 +243,8 @@ mtcars |>
 
 ## Como chamar pacotes
 
-2. Carregar apenas a função chamada, durante seu uso
+2.  Carregar apenas a função chamada, durante seu uso
+
 ```{r}
 #pacote::funcao()
 
