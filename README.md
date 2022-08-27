@@ -3,7 +3,7 @@
 
 O objetivo deste projeto é ensinar o básico da programação em R para a turma de Probabilidade Estatística Aplicada a Contabilidade.
 
-## Ementa
+## Ementa.
 
 | **Tema**                 | **Slides**  | **Código** |
 |:-------------------------|:------------|:-----------|
