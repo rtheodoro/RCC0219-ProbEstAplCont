@@ -1,0 +1,171 @@
+---
+title: "Importação e Tratamento"
+author: "Ricardo Theodoro"
+institute: "OBSCOOP/USP"
+format: 
+   revealjs:
+     logo: img/obscoopusp_logo.png
+     slide-number: true
+     show-slide-number: all
+     preview-links: auto
+     width: 1280
+     height: 720
+     theme: default
+   beamer:
+     slide-number: true
+     show-slide-number: all
+     preview-links: auto
+     aspectratio: 169
+     theme: Luebeck
+editor: visual
+execute:
+  echo: true
+  eval: false
+---
+
+## Base de dados
+
+-   Questionário respondido por vocês e disponível no E-disciplinas com o nome:
+
+`SurvAlun - EstProb I.xlsx`
+
+-   Recomendo que abram o R e rodem os códigos enquanto acompanham estes slides
+-   Ficará mais fácil para verem o que está acontecendo
+
+## Pacotes utilizados
+
+A primeira vez é preciso instalar no computador:
+
+```{r}
+install.packages(c("dplyr", "janitor", "lubridate", "readxl", "stringr"))
+```
+
+Depois, é preciso carregar sempre que for usar:
+
+```{r}
+library(dplyr)
+library(janitor)
+library(lubridate)
+library(readxl)
+library(stringr)
+```
+
+## Importando a base
+
+Lembrando do formato `nome_pacote::funcao()`
+
+```{r}
+survAluno <- readxl::read_xlsx("Aula-RCC0219/data_input/SurvAlun - EstProb I.xlsx")
+```
+
+Resumo das informações:
+
+```{r}
+dplyr::glimpse(survAluno)
+```
+
+## Limpando nomes
+
+-   Podemos observar que os nomes estão muito compridos e não seguem um padrão
+-   Teremos que consertar na mão
+-   Se os nomes fossem curtos, poderiamos utilizar a função `janitor::clean_names()`
+
+```{r}
+names(survAluno) <- c(
+  "data_hora", "altura", "n_calcado", "peso", "cirurgia", "estetica",
+  "estetica_outros", "cor", "oculos", "sexo", "estado_civil",
+  "n_pessoas_moradia", "entidade_estudantil", "tipo_entidade_estudantil"
+) # Colocar o nome de todas as variáveis aqui
+```
+
+Verificando novamente:
+
+```{r}
+dplyr::glimpse(survAluno)
+```
+
+## Separando colunas de data
+
+```{r}
+# Separando colunas
+survAluno <- survAluno |>
+  dplyr::mutate(
+    data = lubridate::ymd(as.Date(data_hora)),
+    hora = stringr::str_sub(data_hora, start = 12),
+    hora = lubridate::hms(hora)
+  ) |>
+  dplyr::select(data_hora, data, hora, everything())
+
+max(survAluno$data_hora) - min(survAluno$data_hora)
+max(survAluno$data) - min(survAluno$data)
+max(lubridate::hour(survAluno$hora)) - min(lubridate::hour(survAluno$hora))
+```
+
+## Resumo de respostas
+
+Estatística descritiva das variáveis numéricas
+
+```{r}
+library(tidyselect)
+survAluno |>
+  dplyr::select(where(is.double)) |>
+  summary()
+```
+
+Resumo das respostas categóricas
+
+```{r}
+survAluno |>
+  dplyr::group_by(animais_domesticos) |>
+  dplyr::count() |>
+  dplyr::arrange(n) |>
+  janitor::adorn_totals()
+```
+
+## Criando função
+
+Criando função para verificar resumo das respostas categóricas de uma vez
+
+```{r}
+resumo_categorica <- function(base, variavel) {
+  base |>
+    dplyr::group_by({{ variavel }}) |>
+    dplyr::count() |>
+    dplyr::arrange(n) |>
+    janitor::adorn_totals()
+}
+```
+
+Criando uma iteração para todas as colunas de uma vez
+
+```{r}
+for (i in 1:ncol(survAluno)) {
+  resumo_categorica(survAluno, survAluno[, i]) |>
+    print()
+}
+```
+
+## Filtrando
+
+- Verificando informações de trabalho apenas daqueles que trabalham com contabilidade
+
+```{r}
+survAluno |>
+   dplyr::filter(trabalho_contabil == "Sim") |>
+   dplyr::group_by(horas_trabalho_semana) |>
+   dplyr::count() |>
+   janitor::adorn_totals()
+```
+
+## Agrupando
+
+- Comparando informações sobre aqueles que trabalham com contabilidade ou não
+
+```{r}
+survAluno |>
+   dplyr::group_by(trabalho_contabil, horas_trabalho_semana) |>
+   dplyr::count()
+```
+
+## 
+
