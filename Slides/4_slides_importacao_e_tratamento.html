@@ -444,92 +444,107 @@
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(survAluno)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+<section>
+<section id="selecionando-colunas" class="title-slide slide level1 center">
+<h1>Selecionando colunas</h1>
+<p>Existem duas formas de selecionar variáveis de um <code>data.frame</code></p>
+<p>Primeira, com pacote base do R</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>survAluno[, <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>]</span>
+<span id="cb7-2"><a href="#cb7-2"></a>survAluno[, <span class="fu">c</span>(<span class="st">"bandejao"</span>,<span class="st">"ano_ingresso_usp"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Segunda, com o pacote <code>dplyr</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>survAluno <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>   dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a>servAluno <span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>   dplyr<span class="sc">::</span><span class="fu">select</span>(bandejao<span class="sc">:</span>ano_ingresso_usp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="filtrando-valores" class="slide level2">
+<h2>Filtrando valores</h2>
+<ul>
+<li>Verificando informações de trabalho apenas daqueles que trabalham com contabilidade</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>survAluno <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>   dplyr<span class="sc">::</span><span class="fu">filter</span>(trabalho_contabil <span class="sc">==</span> <span class="st">"Sim"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>   dplyr<span class="sc">::</span><span class="fu">group_by</span>(horas_trabalho_semana) <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>   dplyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>   janitor<span class="sc">::</span><span class="fu">adorn_totals</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="agrupando-valores-de-colunas" class="slide level2">
+<h2>Agrupando valores de colunas</h2>
+<ul>
+<li>Comparando informações sobre aqueles que trabalham com contabilidade ou não</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>survAluno <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>   dplyr<span class="sc">::</span><span class="fu">group_by</span>(trabalho_contabil, horas_trabalho_semana) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>   dplyr<span class="sc">::</span><span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section id="separando-colunas-de-data" class="slide level2">
 <h2>Separando colunas de data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Separando colunas</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>survAluno <span class="ot">&lt;-</span> survAluno <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">data =</span> lubridate<span class="sc">::</span><span class="fu">ymd</span>(<span class="fu">as.Date</span>(data_hora)),</span>
-<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">hora =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(data_hora, <span class="at">start =</span> <span class="dv">12</span>),</span>
-<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">hora =</span> lubridate<span class="sc">::</span><span class="fu">hms</span>(hora)</span>
-<span id="cb7-7"><a href="#cb7-7"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(data_hora, data, hora, <span class="fu">everything</span>())</span>
-<span id="cb7-9"><a href="#cb7-9"></a></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="fu">max</span>(survAluno<span class="sc">$</span>data_hora) <span class="sc">-</span> <span class="fu">min</span>(survAluno<span class="sc">$</span>data_hora)</span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="fu">max</span>(survAluno<span class="sc">$</span>data) <span class="sc">-</span> <span class="fu">min</span>(survAluno<span class="sc">$</span>data)</span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="fu">max</span>(lubridate<span class="sc">::</span><span class="fu">hour</span>(survAluno<span class="sc">$</span>hora)) <span class="sc">-</span> <span class="fu">min</span>(lubridate<span class="sc">::</span><span class="fu">hour</span>(survAluno<span class="sc">$</span>hora))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Separando colunas</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>survAluno <span class="ot">&lt;-</span> survAluno <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="at">data =</span> lubridate<span class="sc">::</span><span class="fu">ymd</span>(<span class="fu">as.Date</span>(data_hora)),</span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="at">hora =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(data_hora, <span class="at">start =</span> <span class="dv">12</span>),</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="at">hora =</span> lubridate<span class="sc">::</span><span class="fu">hms</span>(hora)</span>
+<span id="cb11-7"><a href="#cb11-7"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(data_hora, data, hora, <span class="fu">everything</span>())</span>
+<span id="cb11-9"><a href="#cb11-9"></a></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="fu">max</span>(survAluno<span class="sc">$</span>data_hora) <span class="sc">-</span> <span class="fu">min</span>(survAluno<span class="sc">$</span>data_hora)</span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="fu">max</span>(survAluno<span class="sc">$</span>data) <span class="sc">-</span> <span class="fu">min</span>(survAluno<span class="sc">$</span>data)</span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="fu">max</span>(lubridate<span class="sc">::</span><span class="fu">hour</span>(survAluno<span class="sc">$</span>hora)) <span class="sc">-</span> <span class="fu">min</span>(lubridate<span class="sc">::</span><span class="fu">hour</span>(survAluno<span class="sc">$</span>hora))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="resumo-de-respostas" class="slide level2">
 <h2>Resumo de respostas</h2>
 <p>Estatística descritiva das variáveis numéricas</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(tidyselect)</span>
-<span id="cb8-2"><a href="#cb8-2"></a>survAluno <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">where</span>(is.double)) <span class="sc">|&gt;</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">library</span>(tidyselect)</span>
+<span id="cb12-2"><a href="#cb12-2"></a>survAluno <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">where</span>(is.double)) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Resumo das respostas categóricas</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>survAluno <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(animais_domesticos) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(n) <span class="sc">|&gt;</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>  janitor<span class="sc">::</span><span class="fu">adorn_totals</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>survAluno <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(animais_domesticos) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(n) <span class="sc">|&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  janitor<span class="sc">::</span><span class="fu">adorn_totals</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="criando-função" class="slide level2">
 <h2>Criando função</h2>
 <p>Criando função para verificar resumo das respostas categóricas de uma vez</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>resumo_categorica <span class="ot">&lt;-</span> <span class="cf">function</span>(base, variavel) {</span>
-<span id="cb10-2"><a href="#cb10-2"></a>  base <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>({{ variavel }}) <span class="sc">|&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a>    dplyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">|&gt;</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(n) <span class="sc">|&gt;</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a>    janitor<span class="sc">::</span><span class="fu">adorn_totals</span>()</span>
-<span id="cb10-7"><a href="#cb10-7"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>resumo_categorica <span class="ot">&lt;-</span> <span class="cf">function</span>(base, variavel) {</span>
+<span id="cb14-2"><a href="#cb14-2"></a>  base <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>({{ variavel }}) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>    dplyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">|&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(n) <span class="sc">|&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>    janitor<span class="sc">::</span><span class="fu">adorn_totals</span>()</span>
+<span id="cb14-7"><a href="#cb14-7"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Criando uma iteração para todas as colunas de uma vez</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(survAluno)) {</span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">resumo_categorica</span>(survAluno, survAluno[, i]) <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>    <span class="fu">print</span>()</span>
-<span id="cb11-4"><a href="#cb11-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(survAluno)) {</span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">resumo_categorica</span>(survAluno, survAluno[, i]) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>    <span class="fu">print</span>()</span>
+<span id="cb15-4"><a href="#cb15-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="filtrando" class="slide level2">
-<h2>Filtrando</h2>
-<ul>
-<li>Verificando informações de trabalho apenas daqueles que trabalham com contabilidade</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>survAluno <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>   dplyr<span class="sc">::</span><span class="fu">filter</span>(trabalho_contabil <span class="sc">==</span> <span class="st">"Sim"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>   dplyr<span class="sc">::</span><span class="fu">group_by</span>(horas_trabalho_semana) <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>   dplyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">|&gt;</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>   janitor<span class="sc">::</span><span class="fu">adorn_totals</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="agrupando" class="slide level2">
-<h2>Agrupando</h2>
-<ul>
-<li>Comparando informações sobre aqueles que trabalham com contabilidade ou não</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>survAluno <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>   dplyr<span class="sc">::</span><span class="fu">group_by</span>(trabalho_contabil, horas_trabalho_semana) <span class="sc">|&gt;</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>   dplyr<span class="sc">::</span><span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="section" class="slide level2">
-<h2></h2>
 
 <img src="img/obscoopusp_logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

@@ -52,6 +52,37 @@ dplyr::glimpse(survAluno)
 
 str(survAluno)
 
+# Selecionando colunas ----
+
+# Existem duas formas de selecionar variáveis de um `data.frame`
+
+# Primeira, com pacote base do R
+
+survAluno[, 1:25]
+survAluno[, c("bandejao","ano_ingresso_usp")]
+
+# Segunda, com o pacote `dplyr`
+
+survAluno |>
+   dplyr::select(1:25)
+
+survAluno |>
+   dplyr::select(bandejao:ano_ingresso_usp)
+
+# Filtrando valores ----
+
+survAluno |>
+   dplyr::filter(trabalho_contabil == "Sim") |>
+   dplyr::group_by(horas_trabalho_semana) |>
+   dplyr::count() |>
+   janitor::adorn_totals()
+
+# Agrupando valores de colunas ----
+
+survAluno |>
+   dplyr::group_by(trabalho_contabil, horas_trabalho_semana) |>
+   dplyr::count()
+
 # Separando colunas
 survAluno <- survAluno |>
   dplyr::mutate(
@@ -65,7 +96,7 @@ max(survAluno$data_hora) - min(survAluno$data_hora)
 max(survAluno$data) - min(survAluno$data)
 max(lubridate::hour(survAluno$hora)) - min(lubridate::hour(survAluno$hora))
 
-## Resumo de respostas ----
+# Resumo de respostas ----
 
 # Estatística descritiva das variáveis numéricas
 library(tidyselect)
@@ -97,18 +128,5 @@ for (i in 1:ncol(survAluno)) {
 }
 
 
-# Filtrando  ----
-
-survAluno |>
-   dplyr::filter(trabalho_contabil == "Sim") |>
-   dplyr::group_by(horas_trabalho_semana) |>
-   dplyr::count() |>
-   janitor::adorn_totals()
-
-# Agrupando ----
-
-survAluno |>
-   dplyr::group_by(trabalho_contabil, horas_trabalho_semana) |>
-   dplyr::count()
 
 

@@ -84,6 +84,53 @@ Verificando novamente:
 dplyr::glimpse(survAluno)
 ```
 
+# Selecionando colunas
+
+Existem duas formas de selecionar variáveis de um `data.frame`
+
+Primeira, com pacote base do R
+
+```{r}
+survAluno[, 1:25]
+survAluno[, c("bandejao","ano_ingresso_usp")]
+```
+
+Segunda, com o pacote `dplyr`
+
+```{r}
+survAluno |>
+   dplyr::select(1:25)
+
+servAluno |>
+   dplyr::select(bandejao:ano_ingresso_usp)
+```
+
+
+## Filtrando valores
+
+- Verificando informações de trabalho apenas daqueles que trabalham com contabilidade
+
+```{r}
+survAluno |>
+   dplyr::filter(trabalho_contabil == "Sim") |>
+   dplyr::group_by(horas_trabalho_semana) |>
+   dplyr::count() |>
+   janitor::adorn_totals()
+```
+
+## Agrupando valores de colunas
+
+- Comparando informações sobre aqueles que trabalham com contabilidade ou não
+
+```{r}
+survAluno |>
+   dplyr::group_by(trabalho_contabil, horas_trabalho_semana) |>
+   dplyr::count()
+```
+
+
+
+
 ## Separando colunas de data
 
 ```{r}
@@ -145,27 +192,5 @@ for (i in 1:ncol(survAluno)) {
 }
 ```
 
-## Filtrando
 
-- Verificando informações de trabalho apenas daqueles que trabalham com contabilidade
-
-```{r}
-survAluno |>
-   dplyr::filter(trabalho_contabil == "Sim") |>
-   dplyr::group_by(horas_trabalho_semana) |>
-   dplyr::count() |>
-   janitor::adorn_totals()
-```
-
-## Agrupando
-
-- Comparando informações sobre aqueles que trabalham com contabilidade ou não
-
-```{r}
-survAluno |>
-   dplyr::group_by(trabalho_contabil, horas_trabalho_semana) |>
-   dplyr::count()
-```
-
-## 
 
