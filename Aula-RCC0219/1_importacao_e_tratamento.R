@@ -51,6 +51,8 @@ survAlun <- survAlun |>
    ) |>
    dplyr::select(data_hora, data, hora, everything())
 
+max(survAlun$data_hora) - min(survAlun$data_hora)
 max(survAlun$data) - min(survAlun$data)
-max(survAlun$hora) %--% min(survAlun$hora)
+max(lubridate::hour(survAlun$hora)) - min(lubridate::hour(survAlun$hora))
+
 
