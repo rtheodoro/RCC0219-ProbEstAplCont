@@ -21,7 +21,7 @@ library(stringr)
 
 # Importando --------------------------------------------------------------
 
-survAluno <- readxl::read_xlsx("Aula-RCC0219/data_input/SurvAlun - EstProb I.xlsx")
+survAluno <- readxl::read_xlsx("data_raw/SurvAlun - EstProb I.xlsx")
 
 # Resumo
 dplyr::glimpse(survAluno)
