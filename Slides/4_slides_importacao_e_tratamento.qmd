@@ -23,7 +23,7 @@ execute:
   eval: false
 ---
 
-## Base de dados
+# Base de dados
 
 -   Questionário respondido por vocês e disponível no E-disciplinas com o nome:
 
@@ -32,7 +32,7 @@ execute:
 -   Recomendo que abram o R e rodem os códigos enquanto acompanham estes slides
 -   Ficará mais fácil para verem o que está acontecendo
 
-## Pacotes utilizados
+# Pacotes utilizados
 
 A primeira vez é preciso instalar no computador:
 
@@ -50,7 +50,7 @@ library(readxl)
 library(stringr)
 ```
 
-## Importando a base
+# Importando a base
 
 Lembrando do formato `nome_pacote::funcao()`
 
@@ -64,7 +64,7 @@ Resumo das informações:
 dplyr::glimpse(survAluno)
 ```
 
-## Limpando nomes
+# Limpando nomes
 
 -   Podemos observar que os nomes estão muito compridos e não seguem um padrão
 -   Teremos que consertar na mão
@@ -106,7 +106,7 @@ servAluno |>
 ```
 
 
-## Filtrando valores
+# Filtrando valores
 
 - Verificando informações de trabalho apenas daqueles que trabalham com contabilidade
 
@@ -118,7 +118,7 @@ survAluno |>
    janitor::adorn_totals()
 ```
 
-## Agrupando valores de colunas
+# Agrupando valores de colunas
 
 - Comparando informações sobre aqueles que trabalham com contabilidade ou não
 
@@ -131,7 +131,7 @@ survAluno |>
 
 
 
-## Separando colunas de data
+# Separando colunas de data
 
 ```{r}
 # Separando colunas
@@ -148,7 +148,7 @@ max(survAluno$data) - min(survAluno$data)
 max(lubridate::hour(survAluno$hora)) - min(lubridate::hour(survAluno$hora))
 ```
 
-## Resumo de respostas
+# Resumo de respostas
 
 Estatística descritiva das variáveis numéricas
 
@@ -169,7 +169,7 @@ survAluno |>
   janitor::adorn_totals()
 ```
 
-## Criando função
+# Criando função
 
 Criando função para verificar resumo das respostas categóricas de uma vez
 
@@ -194,3 +194,27 @@ for (i in 1:ncol(survAluno)) {
 
 
 
+# Padronizado as respostas 
+
+```{r}
+survAluno <- survAluno |>
+  dplyr::mutate(
+    estetica_outros = ifelse(is.na(estetica_outros) |
+      estetica_outros == "nenhum" |
+      estetica_outros == "nada",
+    "Nenhum",
+    estetica_outros
+    ),
+    cidade_empresa = tolower(cidade_empresa),
+    cidade_empresa = abjutils::rm_accent(cidade_empresa),
+    cidade_empresa = stringr::str_replace_all(cidade_empresa, "[[:punct:]]", ""),
+    cidade_empresa = dplyr::case_when(
+      stringr::str_detect(cidade_empresa, "nao") |
+        cidade_empresa == "" ~ "nenhuma",
+      cidade_empresa == "rp" ~ "ribeirao preto",
+      TRUE ~ as.character(cidade_empresa)
+    ),
+    n_livros_ano = as.numeric(n_livros_ano),
+    n_livros_ano = ifelse(is.na(n_livros_ano), 0, n_livros_ano)
+  )
+```

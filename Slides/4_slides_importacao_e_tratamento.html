@@ -7,7 +7,7 @@
 <link href="4_slides_importacao_e_tratamento_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="4_slides_importacao_e_tratamento_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="4_slides_importacao_e_tratamento_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.37">
+  <meta name="generator" content="quarto-1.0.38">
 
   <meta name="author" content="Ricardo Theodoro">
   <title>Importação e Tratamento</title>
@@ -388,8 +388,8 @@
   <p class="institute">OBSCOOP/USP</p>
 </section>
 
-<section id="base-de-dados" class="slide level2">
-<h2>Base de dados</h2>
+<section id="base-de-dados" class="title-slide slide level1 center">
+<h1>Base de dados</h1>
 <ul>
 <li>Questionário respondido por vocês e disponível no E-disciplinas com o nome:</li>
 </ul>
@@ -399,8 +399,9 @@
 <li>Ficará mais fácil para verem o que está acontecendo</li>
 </ul>
 </section>
-<section id="pacotes-utilizados" class="slide level2">
-<h2>Pacotes utilizados</h2>
+
+<section id="pacotes-utilizados" class="title-slide slide level1 center">
+<h1>Pacotes utilizados</h1>
 <p>A primeira vez é preciso instalar no computador:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"janitor"</span>, <span class="st">"lubridate"</span>, <span class="st">"readxl"</span>, <span class="st">"stringr"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -414,8 +415,9 @@
 <span id="cb2-5"><a href="#cb2-5"></a><span class="fu">library</span>(stringr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="importando-a-base" class="slide level2">
-<h2>Importando a base</h2>
+
+<section id="importando-a-base" class="title-slide slide level1 center">
+<h1>Importando a base</h1>
 <p>Lembrando do formato <code>nome_pacote::funcao()</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>survAluno <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"Aula-RCC0219/data_input/SurvAlun - EstProb I.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -425,8 +427,9 @@
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(survAluno)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="limpando-nomes" class="slide level2">
-<h2>Limpando nomes</h2>
+
+<section id="limpando-nomes" class="title-slide slide level1 center">
+<h1>Limpando nomes</h1>
 <ul>
 <li>Podemos observar que os nomes estão muito compridos e não seguem um padrão</li>
 <li>Teremos que consertar na mão</li>
@@ -444,7 +447,7 @@
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(survAluno)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section>
+
 <section id="selecionando-colunas" class="title-slide slide level1 center">
 <h1>Selecionando colunas</h1>
 <p>Existem duas formas de selecionar variáveis de um <code>data.frame</code></p>
@@ -462,8 +465,9 @@
 <span id="cb8-5"><a href="#cb8-5"></a>   dplyr<span class="sc">::</span><span class="fu">select</span>(bandejao<span class="sc">:</span>ano_ingresso_usp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="filtrando-valores" class="slide level2">
-<h2>Filtrando valores</h2>
+
+<section id="filtrando-valores" class="title-slide slide level1 center">
+<h1>Filtrando valores</h1>
 <ul>
 <li>Verificando informações de trabalho apenas daqueles que trabalham com contabilidade</li>
 </ul>
@@ -475,8 +479,9 @@
 <span id="cb9-5"><a href="#cb9-5"></a>   janitor<span class="sc">::</span><span class="fu">adorn_totals</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="agrupando-valores-de-colunas" class="slide level2">
-<h2>Agrupando valores de colunas</h2>
+
+<section id="agrupando-valores-de-colunas" class="title-slide slide level1 center">
+<h1>Agrupando valores de colunas</h1>
 <ul>
 <li>Comparando informações sobre aqueles que trabalham com contabilidade ou não</li>
 </ul>
@@ -486,8 +491,9 @@
 <span id="cb10-3"><a href="#cb10-3"></a>   dplyr<span class="sc">::</span><span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="separando-colunas-de-data" class="slide level2">
-<h2>Separando colunas de data</h2>
+
+<section id="separando-colunas-de-data" class="title-slide slide level1 center">
+<h1>Separando colunas de data</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Separando colunas</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>survAluno <span class="ot">&lt;-</span> survAluno <span class="sc">|&gt;</span></span>
@@ -503,8 +509,9 @@
 <span id="cb11-12"><a href="#cb11-12"></a><span class="fu">max</span>(lubridate<span class="sc">::</span><span class="fu">hour</span>(survAluno<span class="sc">$</span>hora)) <span class="sc">-</span> <span class="fu">min</span>(lubridate<span class="sc">::</span><span class="fu">hour</span>(survAluno<span class="sc">$</span>hora))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="resumo-de-respostas" class="slide level2">
-<h2>Resumo de respostas</h2>
+
+<section id="resumo-de-respostas" class="title-slide slide level1 center">
+<h1>Resumo de respostas</h1>
 <p>Estatística descritiva das variáveis numéricas</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">library</span>(tidyselect)</span>
@@ -521,8 +528,9 @@
 <span id="cb13-5"><a href="#cb13-5"></a>  janitor<span class="sc">::</span><span class="fu">adorn_totals</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="criando-função" class="slide level2">
-<h2>Criando função</h2>
+
+<section id="criando-função" class="title-slide slide level1 center">
+<h1>Criando função</h1>
 <p>Criando função para verificar resumo das respostas categóricas de uma vez</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>resumo_categorica <span class="ot">&lt;-</span> <span class="cf">function</span>(base, variavel) {</span>
@@ -540,11 +548,37 @@
 <span id="cb15-3"><a href="#cb15-3"></a>    <span class="fu">print</span>()</span>
 <span id="cb15-4"><a href="#cb15-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+
+<section id="padronizado-as-respostas" class="title-slide slide level1 center">
+<h1>Padronizado as respostas</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>survAluno <span class="ot">&lt;-</span> survAluno <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb16-3"><a href="#cb16-3"></a>    <span class="at">estetica_outros =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(estetica_outros) <span class="sc">|</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>      estetica_outros <span class="sc">==</span> <span class="st">"nenhum"</span> <span class="sc">|</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>      estetica_outros <span class="sc">==</span> <span class="st">"nada"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="st">"Nenhum"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7"></a>    estetica_outros</span>
+<span id="cb16-8"><a href="#cb16-8"></a>    ),</span>
+<span id="cb16-9"><a href="#cb16-9"></a>    <span class="at">cidade_empresa =</span> <span class="fu">tolower</span>(cidade_empresa),</span>
+<span id="cb16-10"><a href="#cb16-10"></a>    <span class="at">cidade_empresa =</span> abjutils<span class="sc">::</span><span class="fu">rm_accent</span>(cidade_empresa),</span>
+<span id="cb16-11"><a href="#cb16-11"></a>    <span class="at">cidade_empresa =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(cidade_empresa, <span class="st">"[[:punct:]]"</span>, <span class="st">""</span>),</span>
+<span id="cb16-12"><a href="#cb16-12"></a>    <span class="at">cidade_empresa =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb16-13"><a href="#cb16-13"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cidade_empresa, <span class="st">"nao"</span>) <span class="sc">|</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a>        cidade_empresa <span class="sc">==</span> <span class="st">""</span> <span class="sc">~</span> <span class="st">"nenhuma"</span>,</span>
+<span id="cb16-15"><a href="#cb16-15"></a>      cidade_empresa <span class="sc">==</span> <span class="st">"rp"</span> <span class="sc">~</span> <span class="st">"ribeirao preto"</span>,</span>
+<span id="cb16-16"><a href="#cb16-16"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(cidade_empresa)</span>
+<span id="cb16-17"><a href="#cb16-17"></a>    ),</span>
+<span id="cb16-18"><a href="#cb16-18"></a>    <span class="at">n_livros_ano =</span> <span class="fu">as.numeric</span>(n_livros_ano),</span>
+<span id="cb16-19"><a href="#cb16-19"></a>    <span class="at">n_livros_ano =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(n_livros_ano), <span class="dv">0</span>, n_livros_ano)</span>
+<span id="cb16-20"><a href="#cb16-20"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 <img src="img/obscoopusp_logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
