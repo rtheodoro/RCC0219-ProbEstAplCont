@@ -134,7 +134,7 @@ survAluno <- survAluno |>
     estetica_outros = ifelse(is.na(estetica_outros) |
       estetica_outros == "nenhum" |
       estetica_outros == "nada",
-    "Nenhum",
+    "nenhum",
     estetica_outros
     ),
     cidade_empresa = tolower(cidade_empresa),
@@ -146,6 +146,6 @@ survAluno <- survAluno |>
       cidade_empresa == "rp" ~ "ribeirao preto",
       TRUE ~ as.character(cidade_empresa)
     ),
-    n_livros_ano = as.numeric(n_livros_ano),
+    n_livros_ano = stringr::str_extract(n_livros_ano, "[0-9]+"),
     n_livros_ano = ifelse(is.na(n_livros_ano), 0, n_livros_ano)
   )
