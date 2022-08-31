@@ -10,8 +10,9 @@
 # Pacotes utilizados ------------------------------------------------------
 
 # Instalar antes:
-install.packages(c("dplyr", "janitor", "lubridate", "readxl", "stringr"))
+install.packages(c("abjutils", "dplyr", "janitor", "lubridate", "readxl", "stringr"))
 
+library(abjutils)
 library(dplyr)
 library(janitor)
 library(lubridate)
@@ -59,29 +60,29 @@ str(survAluno)
 # Primeira, com pacote base do R
 
 survAluno[, 1:25]
-survAluno[, c("bandejao","ano_ingresso_usp")]
+survAluno[, c("bandejao", "ano_ingresso_usp")]
 
 # Segunda, com o pacote `dplyr`
 
 survAluno |>
-   dplyr::select(1:25)
+  dplyr::select(1:25)
 
 survAluno |>
-   dplyr::select(bandejao:ano_ingresso_usp)
+  dplyr::select(bandejao:ano_ingresso_usp)
 
 # Filtrando valores ----
 
 survAluno |>
-   dplyr::filter(trabalho_contabil == "Sim") |>
-   dplyr::group_by(horas_trabalho_semana) |>
-   dplyr::count() |>
-   janitor::adorn_totals()
+  dplyr::filter(trabalho_contabil == "Sim") |>
+  dplyr::group_by(horas_trabalho_semana) |>
+  dplyr::count() |>
+  janitor::adorn_totals()
 
 # Agrupando valores de colunas ----
 
 survAluno |>
-   dplyr::group_by(trabalho_contabil, horas_trabalho_semana) |>
-   dplyr::count()
+  dplyr::group_by(trabalho_contabil, horas_trabalho_semana) |>
+  dplyr::count()
 
 # Separando colunas
 survAluno <- survAluno |>
@@ -111,22 +112,40 @@ survAluno |>
   dplyr::arrange(n) |>
   janitor::adorn_totals()
 
-
 ### Criando função ----
-resumo_categorica <- function(base, variavel) {
-  base |>
-    dplyr::group_by({{ variavel }}) |>
+resumo_categorica <- function(data, var) {
+  data |>
+    dplyr::group_by({{ var }}) |>
     dplyr::count() |>
     dplyr::arrange(n) |>
     janitor::adorn_totals()
 }
 
-# Criando uma iteração para todas as colunsa de vuma vez
+# Criando uma iteração para todas as colunas de uma vez
 for (i in 1:ncol(survAluno)) {
-   resumo_categorica(survAluno, survAluno[, i]) |>
+  resumo_categorica(survAluno, survAluno[, i]) |>
     print()
 }
 
+# Padronizado as respostas ----
 
-
-
+survAluno <- survAluno |>
+  dplyr::mutate(
+    estetica_outros = ifelse(is.na(estetica_outros) |
+      estetica_outros == "nenhum" |
+      estetica_outros == "nada",
+    "Nenhum",
+    estetica_outros
+    ),
+    cidade_empresa = tolower(cidade_empresa),
+    cidade_empresa = abjutils::rm_accent(cidade_empresa),
+    cidade_empresa = stringr::str_replace_all(cidade_empresa, "[[:punct:]]", ""),
+    cidade_empresa = dplyr::case_when(
+      stringr::str_detect(cidade_empresa, "nao") |
+        cidade_empresa == "" ~ "nenhuma",
+      cidade_empresa == "rp" ~ "ribeirao preto",
+      TRUE ~ as.character(cidade_empresa)
+    ),
+    n_livros_ano = as.numeric(n_livros_ano),
+    n_livros_ano = ifelse(is.na(n_livros_ano), 0, n_livros_ano)
+  )
