@@ -13,10 +13,11 @@ O objetivo deste projeto é ensinar o básico da programação em R para a turma
 | Importação e Tratamento de Dados |  [4_importacao_e_tratamento.pdf](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Slides/4_slides_importacao_e_tratamento.pdf)     |  [4_importacao_e_tratamento](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/blob/main/Codigo/4_importacao_e_tratamento.R) |
 | Estatísticas e Visualização      |  5_slide     |  5_codigo | 
 
-Os Slides originais estão na pasta `Slides` e com a extenção `.html`.
-Os Códigos estão na pasta `Codigos`.
+Os Slides originais estão na pasta [`Slides`](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/tree/main/Slides) e com a extenção `.pdf` ou `.html`. Em `.html` está mais bonito, preciso padronizar os outputs.
 
-Na pasta `Aula-RCC0219` estão os arquivos utilizados na aula prática, inclusive exercícios de treino.
+Os Códigos estão na pasta [`Codigo`](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/tree/main/Codigo).
+
+Na pasta [`Aula-RCC0219`](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/tree/main/Aula-RCC0219) estão os arquivos utilizados na aula prática, inclusive exercícios de treino.
 
 ## Referências
 
