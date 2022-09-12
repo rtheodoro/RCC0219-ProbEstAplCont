@@ -4,6 +4,7 @@ author: "Ricardo Theodoro"
 institute: "OBSCOOP/USP"
 format: 
    revealjs:
+     self-contained: true
      logo: img/obscoopusp_logo.png
      slide-number: true
      show-slide-number: all

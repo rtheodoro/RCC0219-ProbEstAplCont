@@ -4,6 +4,7 @@ author: "Ricardo Theodoro"
 institute: "OBSCOOP/USP"
 format: 
    revealjs:
+     self-contained: true
      logo: img/obscoopusp_logo.png
      slide-number: true
      show-slide-number: all
@@ -105,10 +106,9 @@ servAluno |>
    dplyr::select(bandejao:ano_ingresso_usp)
 ```
 
-
 # Filtrando valores
 
-- Verificando informações de trabalho apenas daqueles que trabalham com contabilidade
+-   Verificando informações de trabalho apenas daqueles que trabalham com contabilidade
 
 ```{r}
 survAluno |>
@@ -120,16 +120,13 @@ survAluno |>
 
 # Agrupando valores de colunas
 
-- Comparando informações sobre aqueles que trabalham com contabilidade ou não
+-   Comparando informações sobre aqueles que trabalham com contabilidade ou não
 
 ```{r}
 survAluno |>
    dplyr::group_by(trabalho_contabil, horas_trabalho_semana) |>
    dplyr::count()
 ```
-
-
-
 
 # Separando colunas de data
 
@@ -192,9 +189,7 @@ for (i in 1:ncol(survAluno)) {
 }
 ```
 
-
-
-# Padronizado as respostas 
+# Padronizado as respostas
 
 ```{r}
 survAluno <- survAluno |>

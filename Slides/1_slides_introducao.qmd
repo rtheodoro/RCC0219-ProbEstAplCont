@@ -4,6 +4,7 @@ author: "Ricardo Theodoro"
 institute: "OBSCOOP/USP"
 format: 
    revealjs:
+     self-contained: true
      logo: img/obscoopusp_logo.png
      slide-number: true
      show-slide-number: all
@@ -27,7 +28,7 @@ execute:
 -   Introdução
 -   Apresentando o R e o RStudio
 -   Projetos, Objetos, Funções e Pacotes
--   Importação e Tratamento  
+-   Importação e Tratamento\
 -   Estatística e Visualização
 
 ## O que é o R?
