@@ -10,7 +10,6 @@
 
 ## Operações básicas com o R
 
-
 # Soma
 1 + 1
 
@@ -23,7 +22,6 @@
 # Divisão
 1 / 1 # um dividido por um
 
-
 ## Criando variáveis
 
 # Numérica
@@ -35,13 +33,10 @@ class(numero)
 letra <- "a"
 letra
 
-
-
 ## Criando vetores
 
-
 # Vetor numérico
-numeros <- c(1, 2, 3)
+numeros <- c(1, 2, 3, 4, 5, 6, 6)
 numeros
 
 class(numeros)
@@ -51,6 +46,18 @@ letras <- c("asdffsdf", "b", "c")
 letras
 
 mistura <- c("a", 1, "b", 2)
+
+# Media
+mean(numeros)
+
+# Mediana
+median(numeros)
+
+# Minimo
+min(numeros)
+
+# Máximo
+max(numeros)
 
 ## Criando um data.frame
 

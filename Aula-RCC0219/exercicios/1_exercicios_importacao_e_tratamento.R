@@ -46,7 +46,10 @@
 # 12 - Das pessoas que não fazem refeições no bandejão e leem mais --------
 # de quatro livros por ano: quantas usam óculos?
 
-# 13 - Quais informações tiramos dessa base? ------------------------------
+
+# 13 - Salve essa tratada no formato .csv ---------------------------------
+
+# 14 - Quais informações tiramos dessa base? ------------------------------
 # Quais outras informações você acha interessante tirar?
 
 # Extra -------------------------------------------------------------------
