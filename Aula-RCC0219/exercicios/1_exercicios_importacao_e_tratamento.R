@@ -9,7 +9,7 @@
 # 1 - Importe o questionário survAluno ------------------------------------
 
 # 2 - Selecione as colunas relacionadas a: --------------------------------
-# idade, altura, calcado, peso, cirurgia, oculos, quantidade de refeicoes no 
+# idade, altura, calcado, peso, cirurgia, oculos, quantidade de refeicoes no
 # badeijao, estado civil, animais domésticos, quantidade de livros por ano,
 # ano de ingresso na usp, outros idiomas e sobre doaçao de sangue
 
@@ -46,7 +46,6 @@
 # 12 - Das pessoas que não fazem refeições no bandejão e leem mais --------
 # de quatro livros por ano: quantas usam óculos?
 
-
 # 13 - Salve essa tratada no formato .csv ---------------------------------
 
 # 14 - Quais informações tiramos dessa base? ------------------------------
@@ -72,4 +71,3 @@ basesCursoR::bases_disponiveis()
 # Importe a base escolhida, como no meu exemplo, a base pokemon:
 pokemon <- basesCursoR::pegar_base("pokemon")
 
- 

@@ -10,7 +10,7 @@
 # Pacotes utilizados ------------------------------------------------------
 
 # Instalar antes:
-install.packages(c("abjutils", "dplyr", "janitor", "lubridate", "readxl", "stringr"))
+#install.packages(c("abjutils", "dplyr", "janitor", "lubridate", "readxl", "stringr")) # Só rodar essa linha, a primeira vez
 
 library(abjutils)
 library(dplyr)
@@ -59,8 +59,8 @@ str(survAluno)
 
 # Primeira, com pacote base do R
 
-survAluno[, 1:25]
-survAluno[, c("bandejao", "ano_ingresso_usp")]
+survAluno[, 1:25] # [Linha, Coluna]
+survAluno[1:10, c("bandejao", "ano_ingresso_usp")]
 
 # Segunda, com o pacote `dplyr`
 
@@ -68,9 +68,12 @@ survAluno |>
   dplyr::select(1:25)
 
 survAluno |>
-  dplyr::select(bandejao:ano_ingresso_usp)
+  dplyr::select(bandejao:ano_ingresso_usp) # dois pontos pega todo intervalo de valores
 
 # Filtrando valores ----
+# | = ou
+# & = e
+# dplyr::filter(trabalho_contabil == "Sim" & (altura <=167 | altura >= 185))
 
 survAluno |>
   dplyr::filter(trabalho_contabil == "Sim") |>
@@ -112,6 +115,7 @@ survAluno |>
   dplyr::arrange(n) |>
   janitor::adorn_totals()
 
+
 ### Criando função ----
 resumo_categorica <- function(data, var) {
   data |>
@@ -120,6 +124,9 @@ resumo_categorica <- function(data, var) {
     dplyr::arrange(n) |>
     janitor::adorn_totals()
 }
+
+resumo_categorica(survAluno, estetica)
+
 
 # Criando uma iteração para todas as colunas de uma vez
 for (i in 1:ncol(survAluno)) {
@@ -131,15 +138,15 @@ for (i in 1:ncol(survAluno)) {
 
 survAluno <- survAluno |>
   dplyr::mutate(
-    estetica_outros = ifelse(is.na(estetica_outros) |
-      estetica_outros == "nenhum" |
+    estetica_outros = ifelse(is.na(estetica_outros) | # ifelse(padrao, substituir X, substitui Y)
+      estetica_outros == "Nenhum" |
       estetica_outros == "nada",
     "nenhum",
     estetica_outros
     ),
     cidade_empresa = tolower(cidade_empresa),
     cidade_empresa = abjutils::rm_accent(cidade_empresa),
-    cidade_empresa = stringr::str_replace_all(cidade_empresa, "[[:punct:]]", ""),
+    cidade_empresa = stringr::str_replace_all(cidade_empresa, "[[:punct:]]", ""), # leiam sobre regex
     cidade_empresa = dplyr::case_when(
       stringr::str_detect(cidade_empresa, "nao") |
         cidade_empresa == "" ~ "nenhuma",
@@ -147,8 +154,9 @@ survAluno <- survAluno |>
       TRUE ~ as.character(cidade_empresa)
     ),
     n_livros_ano = stringr::str_extract(n_livros_ano, "[0-9]+"),
-    n_livros_ano = ifelse(is.na(n_livros_ano), 0, n_livros_ano)
+    n_livros_ano = ifelse(is.na(n_livros_ano), 0, n_livros_ano),
+    n_livros_ano = as.numeric(n_livros_ano)
   )
 
 # Para salvar a base tratada -----
-write.csv(survAluno, "data/survAluno_alterado.csv")
+write.csv(survAluno, "data/survAluno_alterado.csv", row.names = FALSE)

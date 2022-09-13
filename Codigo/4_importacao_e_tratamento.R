@@ -149,3 +149,6 @@ survAluno <- survAluno |>
     n_livros_ano = stringr::str_extract(n_livros_ano, "[0-9]+"),
     n_livros_ano = ifelse(is.na(n_livros_ano), 0, n_livros_ano)
   )
+
+# Para salvar a base tratada -----
+write.csv(survAluno, "data/survAluno_alterado.csv")
