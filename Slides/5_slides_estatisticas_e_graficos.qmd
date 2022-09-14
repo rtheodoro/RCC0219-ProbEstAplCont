@@ -1,0 +1,365 @@
+---
+title: "Estatísticas e Gráficos"
+author: "Ricardo Theodoro"
+institute: "OBSCOOP/USP"
+format: 
+   revealjs:
+     self-contained: true
+     logo: img/obscoopusp_logo.png
+     slide-number: true
+     show-slide-number: all
+     preview-links: auto
+     width: 1280
+     height: 720
+     theme: default
+   beamer:
+     slide-number: true
+     show-slide-number: all
+     preview-links: auto
+     aspectratio: 169
+     theme: Luebeck
+editor: visual
+execute:
+  echo: true
+  eval: false
+---
+
+# Estatísticas descritivas e Gráficos
+
+- Estatísticas descritivas
+   - média, mediana, desvio padrão e quartis
+   
+- Gráficos
+   - Histograma, boxplot, barras e pizza
+
+
+# Por que utilizar programação para estatística?
+
+![Ciclo da ciência de dados](img/ds.png)
+
+Estamos na fase de visualizar as informações! 
+
+# Base utilizada
+
+```{r}
+survAluno_alterado <-
+   read.csv("data/survAluno_alterado.csv")
+```
+
+Crie um script no seu projeto e rode esses códigos para ver os resultados.
+
+# Pacotes utilizados
+
+```{r}
+install.packages(c(
+   "dplyr",
+   "ggplot2",
+   "ggthemes",
+   "psych",
+   "summarytools",
+   "tidyselect"
+))
+```
+
+
+# Materiais relacionados
+
+[Sobre estatística básica com R](https://statsandr.com/blog/descriptive-statistics-in-r/#coefficient-of-variation)
+
+[Sobre estatísticas descritivas]( https://medium.com/psicodata/entenda-a-media-pelo-menos-1-desvio-padrao-acima-da-media-145e9edb6a8f)
+
+[Exemplos de ggplot2](https://exts.ggplot2.tidyverse.org/gallery/)
+
+[Galeria de Gráficos](https://r-graph-gallery.com/)
+
+[Resumo do ggplot2](https://nyu-cdsc.github.io/learningr/assets/data-visualization-2.1.pdf)
+
+
+# Estatísticas descritivas com o R
+
+Variáveis numéricas
+
+```{r}
+# Média
+mean(survAluno_alterado$n_livros_ano)
+```
+
+```{r}
+# Desvio Padrão
+sd(survAluno_alterado$n_livros_ano)
+```
+
+```{r}
+# Mediana
+median(survAluno_alterado$n_livros_ano)
+```
+
+```{r}
+# Quartil
+quantile(survAluno_alterado$n_livros_ano)
+```
+
+```{r}
+# Estatísticas descritvas
+survAluno_alterado |>
+   dplyr::select(where(is.numeric)) |> # rodar library(tidyselect)
+   psych::describe(quant = c(0, .25, .5, .75, 1))
+```
+
+# Estatísticas descritivas com o R
+
+Variáveis categóricas
+
+- Resumo dos dados
+
+```{r}
+library(tidyselect)
+
+psych::describeBy(survAluno_alterado |>
+                     dplyr::select(where(is.numeric)),
+                  survAluno_alterado$religiao)
+```
+
+```{r}
+# Frequência
+survAluno_alterado$animais_domesticos |>
+   as.factor() |>
+   summary()
+```
+
+```{r}
+# Proporções
+survAluno_alterado$animais_domesticos |>
+   table() |>
+   proportions() |>
+   round(2)
+```
+
+
+# Estatísticas descritivas com o R
+
+Variáveis categóricas - Tabelas de frequência e proporções
+
+```{r}
+# Por linha
+table(survAluno_alterado$animais_domesticos,
+      survAluno_alterado$casa_pais) |>
+   proportions() |>
+   round(2)
+```
+
+```{r}
+# Por coluna
+table(survAluno_alterado$animais_domesticos,
+      survAluno_alterado$casa_pais) |>
+   proportions(2) |>
+   round(2)
+```
+
+```{r}
+summarytools::ctable(
+   x = survAluno_alterado$animais_domesticos,
+   y = survAluno_alterado$casa_pais,
+   prop = "t" # Exibe o total
+)
+```
+
+# Gráficos
+
+Histograma
+
+   - Utilizado para verificar a distribuição dos dados
+
+```{r}
+hist(
+   survAluno_alterado$altura,
+   freq = FALSE,
+   main = "Distribuição da Altura dos Alunos",
+   ylab = "Densidade",
+   xlab = "Valores da altura"
+)
+
+# Curva de densidade (deve ser plotada sobre histograma de densidade)
+lines(density(survAluno_alterado$altura),
+      lwd = 2,
+      col = "red")
+```
+
+# Gráficos - Histograma
+
+![Histograma da distribuição de altura dos alunos](img/g_hist_dist_aluno.png)
+
+Teste de normalidade
+
+```{r}
+shapiro.test(survAluno_alterado$altura) # p-valor > 0,05 -> A distribuição é normal
+```
+
+# Gráficos - Boxplot
+
+Boxplot
+
+   - Utilizado para verificar a distribuição dos dados
+   
+```{r}
+boxplot(
+   survAluno_alterado$altura,
+   main = "Boxplot da Altura dos Alunos",
+   ylab = "Altura",
+   xlab = "Distribuição",
+   col = "darkgreen"
+)
+```
+
+
+# Gráficos - Boxplot
+
+![Boxplot altura dos alunos](img/g_boxplot_altura.png)
+
+```{r}
+# Conferindo
+quantile(survAluno_alterado$altura)
+```
+
+# Exportando gráficos
+
+Como salvar o gráfico como imagem .png
+
+```{r}
+png("graficos/boxplot_n_livros.png")
+
+survAluno_alterado |>
+   ggplot2::ggplot() +
+   ggplot2::aes(x = n_livros_ano) +
+   ggplot2::geom_boxplot(
+      fill = "lightblue",
+      outlier.colour = "red",
+      outlier.shape = 25,
+      outlier.size = 2
+   ) +
+   ggplot2::coord_flip() +
+   ggplot2::labs(title = 'Boxplot Quantidade de Livros por Ano') +
+   ggplot2::xlab("Frequência na Quantidade de Livros")
+
+dev.off()
+```
+
+# Exportando gráficos
+
+![Boxplot quantidade de livros por ano](img/g_boxplot_n_livros.png)
+
+# Gráficos com ggplot2 
+
+Boxplot com ggplot2
+   
+   - Ao invés de |>, usamos o +
+
+```{r}
+survAluno_alterado |>
+   ggplot2::ggplot() + # primeira camada
+   ggplot2::aes(x = n_livros_ano) + # definição estética e eixos
+   ggplot2::geom_boxplot(  # definimos que será usado um boxplot e suas características
+      fill = "lightblue",
+      outlier.colour = "red",
+      outlier.shape = 25,
+      outlier.size = 2
+   ) +
+   ggplot2::coord_flip() + # alteramos as coordenadas
+   ggplot2::labs(title = 'Boxplot Quantidade de Livros por Ano') + # adicionamos título
+   ggplot2::xlab("Frequência na Quantidade de Livros") # adicionamos legenda para o eixo x
+```
+
+# Gráficos com ggplot2
+
+Histograma
+
+```{r}
+survAluno_alterado |>
+   ggplot2::ggplot() +
+   ggplot2::aes(n_livros_ano) +
+   ggplot2::geom_histogram(      # tipo de gráfico
+      ggplot2::aes(y = ..density..),
+      bins = 13,
+      colour = "#011e5a",
+      fill = "lightblue"
+   ) +
+   # Curva de densidade
+   ggplot2::stat_function(fun = dnorm, # cálculo da curva (dnorm = distribuição normal)
+                          args = list(  # argmentos utilizados para o cálculo
+                             mean = mean(survAluno_alterado$n_livros_ano, na.rm = T),
+                             sd = sd(survAluno_alterado$n_livros_ano, na.rm = T)
+                          ),
+                          colour = "red") +
+   ggplot2::scale_x_continuous(breaks = seq(from = 0, to = 26, by = 2)) +
+   ggplot2::xlab("Quantidade de Livros Lidos por Ano") +
+   ggplot2::ylab("Densidade da Quantidade de Livros") +
+   ggplot2::labs(title = "Histograma da Quantidade de Livros Lidos por Ano")
+```
+
+# Gráficos com ggplot2
+
+![Histograma quantidade de livros por ano](img/g_histograma_n_livros.png)
+
+# Gráfico de Pizza
+
+```{r}
+survAluno_alterado |>
+   dplyr::select(oculos) |>
+   dplyr::group_by(oculos) |>
+   dplyr::count() |>  # Reparem que aqui editamos nossa base antes de gerar o gráfico
+   ggplot2::ggplot() +
+   ggplot2::aes(x = "", y = n, fill = oculos) + # Gráfico de pizza não tem eixo x
+   ggplot2::geom_bar(stat = "identity") + 
+   ggplot2::coord_polar("y") +
+   ggplot2::geom_text(
+      ggplot2::aes(label = n),
+      col = "white",
+      size = 8,
+      position = ggplot2::position_stack(vjust = 0.5)
+   ) +
+   ggplot2::labs(title = "Gráfico de pizza sobre usuários de óculos") +
+   ggplot2::xlab("") +
+   ggplot2::ylab("") +
+   ggplot2::theme_classic() +
+   ggplot2::theme(
+      axis.line = ggplot2::element_blank(),
+      axis.text = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank()
+   ) +
+   ggthemes::scale_fill_colorblind()
+```
+
+# Gráfico de Pizza
+
+![Gráfico de Pizza sobre a quantidade de alunos que usam óculos](img/g_pizza_alunos_oculos.png)
+
+# Gráfico de Pontos
+
+```{r}
+survAluno_alterado |>
+   ggplot2::ggplot() +
+   ggplot2::aes(x = altura, y = peso) +
+   ggplot2::geom_point(colour = "#011e5a") +
+   ggplot2::xlab("Altura") +
+   ggplot2::ylab("Peso") +
+   ggplot2::labs(title = "Relação Peso X Altura")
+```
+
+![Gráfico de Pontos sobre peso x altura](img/g_pontos_pesoxaltura.png)
+
+# Gráfico de Pontos
+
+```{r}
+survAluno_alterado |>
+   ggplot2::ggplot() +
+   ggplot2::aes(x = altura, y = n_calcado) +
+   ggplot2::geom_point(colour = "#011e5a",
+                       fill = "lightblue") +
+   ggplot2::xlab("Altura") +
+   ggplot2::ylab("Nº Calçado") +
+   ggplot2::labs(title = "Relação Nº de Calçado X Altura") +
+   ggplot2::geom_smooth(method = "lm", se = FALSE)
+```
+
+![Gráfico de Pontos sobre calçado x altura](img/g_pontos_calcadoxaltura.png)
+
