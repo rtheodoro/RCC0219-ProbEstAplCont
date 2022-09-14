@@ -6,14 +6,18 @@
 #
 # -------------------------------------------------------------------------#
 
+# Ler https://statsandr.com/blog/descriptive-statistics-in-r/#coefficient-of-variation
+# Ler https://medium.com/psicodata/entenda-a-media-pelo-menos-1-desvio-padrao-acima-da-media-145e9edb6a8f
+
 
 # Pacotes utilizados ------------------------------------------------------
 
 # Instalar antes:
-install.packages(c("dplyr", "ggplot2", "psych", "tidyselect"))
+install.packages(c("dplyr", "summarytools", "ggplot2", "psych", "tidyselect"))
 
 library(dplyr)
-library(ggplot2)
+library(summarytools)
+library(ggplot2) # Procurem pelo pacote esquisse
 library(psych)
 library(tidyselect)
 
@@ -38,26 +42,67 @@ median(survAluno_alterado$n_livros_ano)
 # Quartil
 quantile(survAluno_alterado$n_livros_ano)
 
+# Variáveis categóricas
+library(tidyselect)
+
+psych::describeBy(
+   survAluno_alterado |> dplyr::select(where(is.numeric)),
+   survAluno_alterado$religiao
+)
+
+# Frequência
+survAluno_alterado$animais_domesticos |>
+   as.factor() |>
+   summary()
+
+# Proporções
+survAluno_alterado$animais_domesticos |>
+   table() |>
+   proportions() |>
+   round(2)
+
+# Mais de uma variável
+# Por linha
+table(survAluno_alterado$animais_domesticos,
+      survAluno_alterado$casa_pais) |>
+   proportions() |>
+   round(2)
+
+# Por coluna
+table(survAluno_alterado$animais_domesticos,
+      survAluno_alterado$casa_pais) |>
+   proportions(2) |>
+   round(2)
+
+summarytools::ctable(
+   x = survAluno_alterado$animais_domesticos,
+   y = survAluno_alterado$casa_pais,
+   prop = "t" # Exibe o total
+)
+
 # Estatística descritva
 
 survAluno_alterado |>
    dplyr::select(where(is.numeric)) |> # rodar library(tidyselect)
-   psych::describe()
-
-
-# Sobre médias, medianas e distribuições
-# https://medium.com/psicodata/entenda-a-media-pelo-menos-1-desvio-padrao-acima-da-media-145e9edb6a8f
+   psych::describe(quant=c(0, .25, .5, .75, 1))
 
 
 # Gráficos ----------------------------------------------------------------
 
-# Histograma - gráfico de frequência
+
+## Histograma - gráfico de frequência ------------------------------------
+
 histograma_altura <- hist(
    survAluno_alterado$altura,
    main = "Distribuição da Altura dos Alunos",
    ylab = "Frequência",
    xlab = "Valores da altura"
 )
+
+plot(density(survAluno_alterado$altura),
+     lwd = 2,
+     col = "red")
+
 # Curva de densidade
 desidade_altura <- density(survAluno_alterado$altura)
 
@@ -78,7 +123,8 @@ lines(
 shapiro.test(survAluno_alterado$altura) # p-valor > 0,05 -> A distribuição é normal
 
 
-# Boxplot - visualização dos quartis
+## Boxplot - visualização dos quartis ------------------------------------
+
 boxplot(
    survAluno_alterado$altura,
    main = "Boxplot da Altura dos Alunos",
@@ -90,7 +136,7 @@ boxplot(
 
 quantile(survAluno_alterado$altura)
 
-# Exportando gráficos
+## Exportando gráficos ---------------------------------------------------
 
 # Em .png
 png("Aula-RCC0219/graficos/boxplot_n_livros.png")
@@ -139,5 +185,11 @@ survAluno_alterado |>
 # Nessa situação, a variável possui valores positivos extremos.
 # Ou seja, uma cauda positiva longa. Aqui, Média > Mediana > Moda.
 # Ver summary(survAluno_alterado$n_livros_ano)
-
 dev.off()
+
+
+## Outros gráficos -------------------------------------------------------
+
+# Gráfico de barras
+
+
