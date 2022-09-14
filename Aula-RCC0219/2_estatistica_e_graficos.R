@@ -38,7 +38,7 @@ library(tidyselect)
 # Carregando base ---------------------------------------------------------
 
 survAluno_alterado <-
-   read.csv("Aula-RCC0219/data/survAluno_alterado.csv")
+   read.csv("data/survAluno_alterado.csv")
 
 # Estatísticas ------------------------------------------------------------
 
@@ -154,7 +154,7 @@ quantile(survAluno_alterado$altura)
 ## Exportando gráficos ---------------------------------------------------
 
 # Em .png
-png("Aula-RCC0219/graficos/boxplot_n_livros.png")
+png("graficos/g_boxplot_n_livros.png")
 
 survAluno_alterado |>
    ggplot2::ggplot() +
@@ -172,7 +172,7 @@ survAluno_alterado |>
 dev.off()
 
 # Em .pdf
-pdf("Aula-RCC0219/graficos/hist_n_livros.pdf")
+pdf("graficos/g_hist_n_livros.pdf")
 
 # Criando histograma com {ggplot2}
 survAluno_alterado |>
