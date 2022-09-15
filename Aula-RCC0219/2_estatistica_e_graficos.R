@@ -206,6 +206,18 @@ dev.off()
 
 ## Outros gráficos -------------------------------------------------------
 
+
+# Gráfico de Colunas
+survAluno_alterado |>
+  dplyr::count(idade, oculos) |>
+  ggplot2::ggplot() +
+  ggplot2::aes(x = idade, y = n, fill = oculos) +
+  ggplot2::geom_col(position = 'dodge') +
+  ggplot2::xlab("Idade") +
+  ggplot2::ylab("Quantidade de Alunos") +
+  ggplot2::labs(title = "Relação Idade X Óculos")
+
+
 # Gráfico de pizza
 survAluno_alterado |>
    dplyr::select(oculos) |>
@@ -213,7 +225,7 @@ survAluno_alterado |>
    dplyr::count() |>
    ggplot2::ggplot() +
    ggplot2::aes(x = "", y = n, fill = oculos) +
-   ggplot2::geom_bar(stat = "identity") +
+   ggplot2::geom_col() +
    ggplot2::coord_polar("y") +
    ggplot2::geom_text(
       ggplot2::aes(label = n),
