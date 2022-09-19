@@ -1,7 +1,7 @@
 # -------------------------------------------------------------------------#
 #        Calculando estatíticas e gerando gráficos
 #
-#  Script criado para importar e tratar os dados da base
+#  Script criado para gerar estatisticas e gráficos
 #  SurvAlun - EstProb I.xlsx
 #
 # -------------------------------------------------------------------------#
@@ -27,6 +27,7 @@ install.packages(c(
    "psych",
    "tidyselect"
 ))
+
 
 library(dplyr)
 library(summarytools)
@@ -239,8 +240,7 @@ survAluno_alterado |>
    ggplot2::theme_classic() +
    ggplot2::theme(
       axis.line = ggplot2::element_blank(),
-      axis.text = ggplot2::element_blank(),
-      axis.ticks = ggplot2::element_blank()
+      axis.text = ggplot2::element_blank()
    ) +
    ggthemes::scale_fill_colorblind()
 
