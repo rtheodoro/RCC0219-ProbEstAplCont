@@ -50,7 +50,7 @@ library(tidyselect)
 # Carregando base ---------------------------------------------------------
 
 survAluno_alterado <-
-   read.csv("Aula-RCC0219/data/survAluno_alterado.csv")
+   read.csv("data/survAluno_alterado.csv")
 
 # Estatísticas ------------------------------------------------------------
 
@@ -223,13 +223,13 @@ dev.off()
 
 # Gráfico de Colunas
 survAluno_alterado |>
-  dplyr::count(idade, oculos) |>
-  ggplot2::ggplot() +
-  ggplot2::aes(x = idade, y = n, fill = oculos) +
-  ggplot2::geom_col(position = 'dodge') +
-  ggplot2::xlab("Idade") +
-  ggplot2::ylab("Quantidade de Alunos") +
-  ggplot2::labs(title = "Relação Idade X Óculos")
+   dplyr::count(idade, oculos) |>
+   ggplot2::ggplot() +
+   ggplot2::aes(x = idade, y = n, fill = oculos) +
+   ggplot2::geom_col(position = 'dodge') +
+   ggplot2::xlab("Idade") +
+   ggplot2::ylab("Quantidade de Alunos") +
+   ggplot2::labs(title = "Relação Idade X Óculos")
 
 
 # Gráfico de pizza
@@ -251,10 +251,8 @@ survAluno_alterado |>
    ggplot2::xlab("") +
    ggplot2::ylab("") +
    ggplot2::theme_classic() +
-   ggplot2::theme(
-      axis.line = ggplot2::element_blank(),
-      axis.text = ggplot2::element_blank()
-   ) +
+   ggplot2::theme(axis.line = ggplot2::element_blank(),
+                  axis.text = ggplot2::element_blank()) +
    ggthemes::scale_fill_colorblind()
 
 # Gráfico de pontos
@@ -283,11 +281,15 @@ survAluno_alterado |>
 # Mais de um gráfico no mesmo plot
 
 # Exemplos de gráficos
-p1 <- ggplot2::ggplot(mtcars) + ggplot2::geom_smooth(ggplot2::aes(disp, qsec))
-p2 <- ggplot2::ggplot(mtcars) + ggplot2::geom_bar(ggplot2::aes(carb))
+p1 <-
+   ggplot2::ggplot(mtcars) + ggplot2::geom_smooth(ggplot2::aes(disp, qsec))
+p2 <-
+   ggplot2::ggplot(mtcars) + ggplot2::geom_bar(ggplot2::aes(carb))
 p3 <- ggplot2::ggplot(mtcars) + ggplot2::geom_bar(ggplot2::aes(cyl))
-p4 <- ggplot2::ggplot(mtcars) + ggplot2::geom_point(ggplot2::aes(carb, cyl))
-p5 <- ggplot2::ggplot(mtcars) + ggplot2::geom_point(ggplot2::aes(mpg, gear))
+p4 <-
+   ggplot2::ggplot(mtcars) + ggplot2::geom_point(ggplot2::aes(carb, cyl))
+p5 <-
+   ggplot2::ggplot(mtcars) + ggplot2::geom_point(ggplot2::aes(mpg, gear))
 
 # Pacote patchwork
 install.packages("patchwork")
@@ -374,9 +376,11 @@ g_boxplot_nlivro_nusa_oculos <- survAluno_alterado |>
    ggplot2::xlab("Frequência na Quantidade de Livros")
 
 
-g_qtd_livroslidos_por_oculos <- (g_hist_livro_usa_oculos + g_hist_livro_nusa_oculos) /
-(g_boxplot_nlivro_usa_oculos + g_boxplot_nlivro_nusa_oculos)
+g_qtd_livroslidos_por_oculos <-
+   (g_hist_livro_usa_oculos + g_hist_livro_nusa_oculos) /
+   (g_boxplot_nlivro_usa_oculos + g_boxplot_nlivro_nusa_oculos)
 
-png("Aula-RCC0219/graficos/g_qtd_livroslidos_por_oculos.png", width = 800)
+png("Aula-RCC0219/graficos/g_qtd_livroslidos_por_oculos.png",
+    width = 800)
 g_qtd_livroslidos_por_oculos
 dev.off()

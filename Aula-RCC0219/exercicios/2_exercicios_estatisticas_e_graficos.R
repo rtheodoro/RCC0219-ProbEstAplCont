@@ -9,31 +9,33 @@
 # 1 - Importe o questionário survAluno_alterado ---------------------------
 
 # 2 - Transforme os valores da coluna animais_domesticos em  --------------
-# "Possuo animal de estimacao" e "Não possuo animal de estimação"
+# "Possuo animal de estimação" e "Não possuo animal de estimação"
 
-# 3 - Plote um gráfico de pizza sobre animais domésticos ------------------
+# 3 - Construa um gráfico de pizza sobre animais domésticos ---------------
 
-# 4 - Plote um gráfico de barras para ver a relação entre -----------------
+# 4 - Construa um gráfico de barras para ver a relação entre --------------
 # renda_em_sm e possuir ou não animais_domesticos
 
-# 5 - Plot três boxplots sobre o número de livros lidos por ano:  --------
+# 5 - Construa três boxplots sobre o número de livros lidos por ano:  --------
 # 1 - Com todas as observações, 2 - Filtrando pessoas que comem no bandejão
 # 3 - Filtrando pessoas que não comem no bandejão
 
 # 6 - Calcule a distribuição dos quartis e compare com o boxplot ----------
 # Usando os grupos do exercício 5
 
-# 7 - Crie três histogramas com a curva de densidade ----------------------
+# 7 - Construa três histogramas com a curva de densidade ------------------
 # Usando os grupos do exercício 5
 
-# 8 - Teste se a distruição dos grupos são normais ou não -----------------
+# 8 - Teste se a distribuição dos grupos são normais ou não ---------------
 # Usando os grupos do exercício 5
 
 # 9 - Adicione os três boxplot (ex. 5) em uma única imagem ----------------
+# Eles se alteram? O que muda?
 
-# 10 - Adicione os três histogramas (ex. 6) em uma única imagem -----------
+# 10 - Adicione os três histogramas (ex. 7) em uma única imagem -----------
+# Eles se alteram? A distribuição aparenta mudar?
 
-# 11 - Crie três histogramas com a curva de densidade ---------------------
+# 11 - Construa três histogramas com a curva de densidade sobre a altura-------
 # 1 - Com todas as observações, 2 - Filtrando pessoas que fizeram cirurgia,
 # 3 - Filtrando pessoas que não fizeram
 
