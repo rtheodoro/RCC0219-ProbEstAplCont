@@ -15,31 +15,42 @@
 # Alternativa ao ggplot2, pacote plotly
 
 # Qual gráfico escolher? https://www.data-to-viz.com/
+# Em portugês: https://infogram.com/pt/pagina/escolha-grafico-de-visualizacoes-certo
+
+
+# Como o tidyverse funciona
+# https://tidydatatutor.com/
+
+
 
 # Pacotes utilizados ------------------------------------------------------
 
 # Instalar antes:
-install.packages(c(
-   "dplyr",
-   "summarytools",
-   "ggplot2",
-   "ggthemes",
-   "psych",
-   "tidyselect"
-))
+# install.packages(c(
+#    "dplyr",
+#    "summarytools",
+#    "ggplot2",
+#    "ggthemes",
+#    "gridExtra",
+#    "patchwork",
+#    "psych",
+#    "tidyselect"
+# ))
 
-
+# Carregar
 library(dplyr)
 library(summarytools)
+library(gridExtra)
 library(ggplot2) # Procurem pelo pacote esquisse
 library(ggthemes)
+library(patchwork)
 library(psych)
 library(tidyselect)
 
 # Carregando base ---------------------------------------------------------
 
 survAluno_alterado <-
-   read.csv("data/survAluno_alterado.csv")
+   read.csv("Aula-RCC0219/data/survAluno_alterado.csv")
 
 # Estatísticas ------------------------------------------------------------
 
@@ -47,6 +58,9 @@ survAluno_alterado <-
 
 # Média
 mean(survAluno_alterado$n_livros_ano)
+
+# Variância
+var(survAluno_alterado$n_livros_ano)
 
 # Desvio Padrão
 sd(survAluno_alterado$n_livros_ano)
@@ -207,7 +221,6 @@ dev.off()
 
 ## Outros gráficos -------------------------------------------------------
 
-
 # Gráfico de Colunas
 survAluno_alterado |>
   dplyr::count(idade, oculos) |>
@@ -263,3 +276,107 @@ survAluno_alterado |>
    ggplot2::ylab("Nº Calçado") +
    ggplot2::labs(title = "Relação Nº de Calçado X Altura") +
    ggplot2::geom_smooth(method = "lm", se = FALSE)
+
+
+# Organizando Gráficos ----------------------------------------------------
+
+# Mais de um gráfico no mesmo plot
+
+# Exemplos de gráficos
+p1 <- ggplot2::ggplot(mtcars) + ggplot2::geom_smooth(ggplot2::aes(disp, qsec))
+p2 <- ggplot2::ggplot(mtcars) + ggplot2::geom_bar(ggplot2::aes(carb))
+p3 <- ggplot2::ggplot(mtcars) + ggplot2::geom_bar(ggplot2::aes(cyl))
+p4 <- ggplot2::ggplot(mtcars) + ggplot2::geom_point(ggplot2::aes(carb, cyl))
+p5 <- ggplot2::ggplot(mtcars) + ggplot2::geom_point(ggplot2::aes(mpg, gear))
+
+# Pacote patchwork
+install.packages("patchwork")
+library(patchwork)
+
+((p1 + p2) / (p3 + p4)) | p5
+
+# Pacote gridExtra
+install.packages("gridExtra")
+
+gridExtra::grid.arrange(p1, p2, p3, p4, ncol = 2, nrow = 2)
+
+
+# Plotando dois gráficos juntos
+
+g_hist_livro_usa_oculos <- survAluno_alterado |>
+   dplyr::filter(oculos == "Sim") |>
+   ggplot2::ggplot() +
+   ggplot2::aes(n_livros_ano) +
+   ggplot2::geom_histogram(
+      ggplot2::aes(y = ..density..),
+      bins = 13,
+      colour = "#011e5a",
+      fill = "lightblue"
+   ) +
+   ggplot2::stat_function(fun = dnorm,
+                          args = list(
+                             mean = mean(survAluno_alterado$n_livros_ano, na.rm = T),
+                             sd = sd(survAluno_alterado$n_livros_ano, na.rm = T)
+                          ),
+                          colour = "red") +
+   ggplot2::scale_x_continuous(breaks = seq(from = 0, to = 26, by = 2)) +
+   ggplot2::xlab("Quantidade de Livros Lidos por Ano") +
+   ggplot2::ylab("Densidade da Quantidade de Livros") +
+   ggplot2::labs(title = "Histograma da Quantidade de Livros Lidos por Ano \nPor quem usa Óculos")
+
+g_hist_livro_nusa_oculos <- survAluno_alterado |>
+   dplyr::filter(oculos == "Não") |>
+   ggplot2::ggplot() +
+   ggplot2::aes(n_livros_ano) +
+   ggplot2::geom_histogram(
+      ggplot2::aes(y = ..density..),
+      bins = 13,
+      colour = "#011e5a",
+      fill = "lightblue"
+   ) +
+   ggplot2::stat_function(fun = dnorm,
+                          args = list(
+                             mean = mean(survAluno_alterado$n_livros_ano, na.rm = T),
+                             sd = sd(survAluno_alterado$n_livros_ano, na.rm = T)
+                          ),
+                          colour = "red") +
+   ggplot2::scale_x_continuous(breaks = seq(from = 0, to = 26, by = 2)) +
+   ggplot2::xlab("Quantidade de Livros Lidos por Ano") +
+   ggplot2::ylab("Densidade da Quantidade de Livros") +
+   ggplot2::labs(title = "Histograma da Quantidade de Livros Lidos por Ano \nPor quem não usa Óculos")
+
+g_boxplot_nlivro_usa_oculos <- survAluno_alterado |>
+   dplyr::filter(oculos == "Sim") |>
+   ggplot2::ggplot() +
+   ggplot2::aes(x = n_livros_ano) +
+   ggplot2::geom_boxplot(
+      fill = "lightblue",
+      outlier.colour = "red",
+      outlier.shape = 25,
+      outlier.size = 2
+   ) +
+   ggplot2::coord_flip() +
+   ggplot2::labs(title = 'Boxplot Quantidade de Livros por Ano \nPor quem usa óculos') +
+   ggplot2::xlab("Frequência na Quantidade de Livros")
+
+g_boxplot_nlivro_nusa_oculos <- survAluno_alterado |>
+   dplyr::filter(oculos == "Não") |>
+   ggplot2::ggplot() +
+   ggplot2::aes(x = n_livros_ano) +
+   ggplot2::geom_boxplot(
+      fill = "lightblue",
+      outlier.colour = "red",
+      outlier.shape = 25,
+      outlier.size = 2
+   ) +
+   ggplot2::coord_flip() +
+   ggplot2::labs(title = 'Boxplot Quantidade de Livros por Ano \nPor quem não usa óculos') +
+   ggplot2::xlab("Frequência na Quantidade de Livros")
+
+
+g_qtd_livroslidos_por_oculos <- (g_hist_livro_usa_oculos + g_hist_livro_nusa_oculos) /
+(g_boxplot_nlivro_usa_oculos + g_boxplot_nlivro_nusa_oculos)
+
+png("Aula-RCC0219/graficos/g_qtd_livroslidos_por_oculos.png", width = 800)
+g_qtd_livroslidos_por_oculos
+dev.off()

@@ -10,8 +10,14 @@
 # Pacotes utilizados ------------------------------------------------------
 
 # Instalar antes:
-#install.packages(c("abjutils", "dplyr", "janitor", "lubridate", "readxl", "stringr")) # Só rodar essa linha, a primeira vez
+#install.packages(c("abjutils",
+# "dplyr",
+# "janitor",
+# "lubridate",
+# "readxl",
+# "stringr"))
 
+# Carregar
 library(abjutils)
 library(dplyr)
 library(janitor)

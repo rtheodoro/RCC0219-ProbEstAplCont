@@ -213,3 +213,14 @@ survAluno <- survAluno |>
     n_livros_ano = ifelse(is.na(n_livros_ano), 0, n_livros_ano)
   )
 ```
+
+# Dica
+
+[https://tidydatatutor.com/](https://tidydatatutor.com/)
+
+Esse site mostra como as funções do tidyverse funcionam. 
+
+Ele mostra o passo-a-passo do seu pipe line até chegar no resultado final.
+
+![](img/tidydatatutor.png)
+
