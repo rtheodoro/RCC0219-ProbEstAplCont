@@ -22,6 +22,7 @@ editor: visual
 execute:
   echo: true
   eval: false
+  cache: true
 ---
 
 # Base de dados
@@ -216,11 +217,10 @@ survAluno <- survAluno |>
 
 # Dica
 
-[https://tidydatatutor.com/](https://tidydatatutor.com/)
+<https://tidydatatutor.com/>
 
-Esse site mostra como as funções do tidyverse funcionam. 
+Esse site mostra como as funções do tidyverse funcionam.
 
 Ele mostra o passo-a-passo do seu pipe line até chegar no resultado final.
 
 ![](img/tidydatatutor.png)
-

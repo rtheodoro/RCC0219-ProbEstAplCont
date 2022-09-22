@@ -22,22 +22,21 @@ editor: visual
 execute:
   echo: true
   eval: false
+  cache: true
 ---
 
 # Estatísticas descritivas e Gráficos
 
-- Estatísticas descritivas
-   - média, mediana, desvio padrão e quartis
-   
-- Gráficos
-   - Histograma, boxplot, barras e pizza
-
+-   Estatísticas descritivas
+    -   média, mediana, desvio padrão e quartis
+-   Gráficos
+    -   Histograma, boxplot, barras e pizza
 
 # Por que utilizar programação para estatística?
 
 ![Ciclo da ciência de dados](img/ds.png)
 
-Estamos na fase de visualizar as informações! 
+Estamos na fase de visualizar as informações!
 
 # Base utilizada
 
@@ -61,19 +60,17 @@ install.packages(c(
 ))
 ```
 
-
 # Materiais relacionados
 
 [Sobre estatística básica com R](https://statsandr.com/blog/descriptive-statistics-in-r/#coefficient-of-variation)
 
-[Sobre estatísticas descritivas]( https://medium.com/psicodata/entenda-a-media-pelo-menos-1-desvio-padrao-acima-da-media-145e9edb6a8f)
+[Sobre estatísticas descritivas](https://medium.com/psicodata/entenda-a-media-pelo-menos-1-desvio-padrao-acima-da-media-145e9edb6a8f)
 
 [Exemplos de ggplot2](https://exts.ggplot2.tidyverse.org/gallery/)
 
 [Galeria de Gráficos](https://r-graph-gallery.com/)
 
 [Resumo do ggplot2](https://nyu-cdsc.github.io/learningr/assets/data-visualization-2.1.pdf)
-
 
 # Estatísticas descritivas com o R
 
@@ -110,7 +107,7 @@ survAluno_alterado |>
 
 Variáveis categóricas
 
-- Resumo dos dados
+-   Resumo dos dados
 
 ```{r}
 library(tidyselect)
@@ -134,7 +131,6 @@ survAluno_alterado$animais_domesticos |>
    proportions() |>
    round(2)
 ```
-
 
 # Estatísticas descritivas com o R
 
@@ -168,7 +164,7 @@ summarytools::ctable(
 
 Histograma
 
-   - Utilizado para verificar a distribuição dos dados
+-   Utilizado para verificar a distribuição dos dados
 
 ```{r}
 hist(
@@ -199,8 +195,8 @@ shapiro.test(survAluno_alterado$altura) # p-valor > 0,05 -> A distribuição é 
 
 Boxplot
 
-   - Utilizado para verificar a distribuição dos dados
-   
+-   Utilizado para verificar a distribuição dos dados
+
 ```{r}
 boxplot(
    survAluno_alterado$altura,
@@ -210,7 +206,6 @@ boxplot(
    col = "darkgreen"
 )
 ```
-
 
 # Gráficos - Boxplot
 
@@ -248,11 +243,11 @@ dev.off()
 
 ![Boxplot quantidade de livros por ano](img/g_boxplot_n_livros.png)
 
-# Gráficos com ggplot2 
+# Gráficos com ggplot2
 
 Boxplot com ggplot2
-   
-   - Ao invés de |>, usamos o +
+
+-   Ao invés de \|\>, usamos o +
 
 ```{r}
 survAluno_alterado |>
@@ -362,4 +357,3 @@ survAluno_alterado |>
 ```
 
 ![Gráfico de Pontos sobre calçado x altura](img/g_pontos_calcadoxaltura.png)
-

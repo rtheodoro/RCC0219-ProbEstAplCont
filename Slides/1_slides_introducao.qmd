@@ -21,6 +21,7 @@ format:
 editor: visual
 execute:
   echo: true
+  cache: true
 ---
 
 ## Ementa
