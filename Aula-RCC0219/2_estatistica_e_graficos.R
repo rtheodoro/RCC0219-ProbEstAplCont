@@ -13,10 +13,8 @@
 # Qual gráfico escolher? https://www.data-to-viz.com/
 # Em português: https://infogram.com/pt/pagina/escolha-grafico-de-visualizacoes-certo
 
-
 # Como o tidyverse funciona
 # https://tidydatatutor.com/
-
 
 # Pacotes utilizados ------------------------------------------------------
 
