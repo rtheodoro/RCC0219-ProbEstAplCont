@@ -6,46 +6,42 @@
 #
 # -------------------------------------------------------------------------#
 
-# Ler https://statsandr.com/blog/descriptive-statistics-in-r/#coefficient-of-variation
-# Ler https://medium.com/psicodata/entenda-a-media-pelo-menos-1-desvio-padrao-acima-da-media-145e9edb6a8f
 # Ler https://exts.ggplot2.tidyverse.org/gallery/
 # Ler https://r-graph-gallery.com/
 # Resumo do ggplot2: https://nyu-cdsc.github.io/learningr/assets/data-visualization-2.1.pdf
 
-# Alternativa ao ggplot2, pacote plotly
-
 # Qual gráfico escolher? https://www.data-to-viz.com/
-# Em portugês: https://infogram.com/pt/pagina/escolha-grafico-de-visualizacoes-certo
+# Em português: https://infogram.com/pt/pagina/escolha-grafico-de-visualizacoes-certo
 
 
 # Como o tidyverse funciona
 # https://tidydatatutor.com/
 
 
-
 # Pacotes utilizados ------------------------------------------------------
 
 # Instalar antes:
-# install.packages(c(
-#    "dplyr",
-#    "summarytools",
-#    "ggplot2",
-#    "ggthemes",
-#    "gridExtra",
-#    "patchwork",
-#    "psych",
-#    "tidyselect"
-# ))
+# install.packages("dplyr")
+# install.packages("summarytools")
+# install.packages("gridExtra")
+# install.packages("ggplot2")
+# install.packages("ggthemes")
+# install.packages("patchwork")
+# install.packages("psych")
+# install.packages("tidyselect")
 
-# Carregar
-library(dplyr)
-library(summarytools)
-library(gridExtra)
-library(ggplot2) # Procurem pelo pacote esquisse
-library(ggthemes)
-library(patchwork)
-library(psych)
-library(tidyselect)
+# Carregar:
+# library(dplyr)
+# library(summarytools)
+# library(gridExtra)
+# library(ggplot2) # Procurem pelo pacote esquisse
+# library(ggthemes)
+# library(patchwork)
+# library(psych)
+# library(tidyselect)
+
+# *Está comentado pois usarei no formato pacote::funcao
+# *Assim vocês irão saber de qual pacote vem a função utilizada
 
 # Carregando base ---------------------------------------------------------
 
@@ -279,6 +275,7 @@ survAluno_alterado |>
 # Organizando Gráficos ----------------------------------------------------
 
 # Mais de um gráfico no mesmo plot
+# Um gráfico ao lado do outro
 
 # Exemplos de gráficos
 p1 <-
@@ -292,13 +289,13 @@ p5 <-
    ggplot2::ggplot(mtcars) + ggplot2::geom_point(ggplot2::aes(mpg, gear))
 
 # Pacote patchwork
-install.packages("patchwork")
-library(patchwork)
+# install.packages("patchwork")
+library(patchwork) # Usamos o library pois não é possível usar o formato pacote::funcao
 
 ((p1 + p2) / (p3 + p4)) | p5
 
 # Pacote gridExtra
-install.packages("gridExtra")
+# install.packages("gridExtra")
 
 gridExtra::grid.arrange(p1, p2, p3, p4, ncol = 2, nrow = 2)
 
