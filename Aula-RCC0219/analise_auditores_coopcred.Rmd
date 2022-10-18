@@ -1,0 +1,112 @@
+---
+title: "Análise dos auditores das Cooperativas de Crédito em 2021"
+author: "Ricardo Theodoro"
+date: "2022-10-18"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+# incluse = FALSE - não exibe o código no texto
+
+# aqui iremos adicionar as configurações do markdown
+
+options(scipen = 6, digits = 4) # Transforma notação científica em número inteiro
+
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Objetivo
+
+O objetivo deste *script* é analisar os dados que envolvem os auditores independentes das cooperativas de crédito brasileiras em 2021. Para isso, iremos utilizar os dados disponibilizados pelo Banco Central do Brasil (BACEN), contendo diversas informações sobre as característica destas cooperativas.
+
+Nesta base de dados estão apenas as cooperativas de crédito que informaram seus auditores independentes ao BACEN em 2021, as que não informaram foram retiradas.
+
+Os pacotes utilizados para alcançarmos estes objetivos serão:
+
+```{r instalando_pacotes, eval = FALSE}
+# eval = FALSE mostra o código, mas não roda
+
+# Pacotes
+
+install.packages("dplyr")
+install.packages("glue")
+install.packages("janitor")
+
+
+```
+
+
+## Importação de dados
+
+O primeiro passo para o tratamento da base é importar os dados, para isso vamos utilizar o *chunk* abaixo.
+
+```{r importa_base}
+# Importando a base
+coop_cred_2021_auditores <- read.csv("data_raw/coop_cred_2021_auditores.csv") |>
+   janitor::clean_names()
+```
+
+Como é possível observar, nossa base de dados possui `r ncol(coop_cred_2021_auditores)` variáveis, sendo elas: **`r names(coop_cred_2021_auditores) |> glue::glue_collapse(", ", last = " e ")`**.
+
+Agora, vamos ver um resumo dos dados importados para escolhermos quais variáveis iremos utilizar e quais precisaremos tratar.
+
+```{r resumo_dados}
+dplyr::glimpse(coop_cred_2021_auditores)
+```
+
+É possível observar que temos tanto variáveis categóricas (`chr`) quanto numéricas (`dbl` e `int`). Será preciso verificar se todas estão no formato correto. E, como nós não iremos utilizar todos os dados, então vamos selecionar apenas as colunas de interesse, que são:
+
+```{r selecionando_colunas}
+coop_cred_2021_auditores <- coop_cred_2021_auditores |>
+   dplyr::select(cnpj, auditor_independente, big_four, uf, numero_agencias, 
+                 ativo_total, passivo_total, filiacao)
+```
+
+Agora, vamos analisar as estatísticas descritivas das variáveis numéricas e verificar se estão no formato correto para uso:
+
+```{r}
+library(tidyselect)
+
+coop_cred_2021_auditores |>
+   dplyr::select(where(is.double), -cnpj) |> 
+   summary()
+
+# A função `where` não funciona no formato
+#  tidyselect::where(), por isso usamos o library()
+
+# Removemos o cnpj pois ele serve apenas para identificação
+
+
+
+```
+
+Aqui, podemos observar que nem todas as variáveis que contém números estão classificadas como numéricas, para isso precisamos transformá-las
+
+```{r transformando_em_numericas}
+
+# Primeira forma
+coop_cred_2021_auditores$big_four <- as.numeric(coop_cred_2021_auditores$big_four)
+
+# Segunda forma
+
+coop_cred_2021_auditores <- coop_cred_2021_auditores |>
+   dplyr::mutate(
+      numero_agencias = as.numeric(numero_agencias )
+   )
+
+```
+
+Agora, rodamos novamente o código para obtermos as estatísticas descritivas das variáveis numéricas
+
+```{r}
+coop_cred_2021_auditores |>
+   dplyr::select(where(is.double), -cnpj) |> # aqui removemos o cnpj pois ele serve apenas para identificação
+   summary()
+```
+
+
+
+## Exploração de dados
+
+## Análise gráfica
