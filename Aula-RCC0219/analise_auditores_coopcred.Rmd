@@ -90,7 +90,7 @@ dplyr::glimpse(coop_cred_2021_auditores)
 
 coop_cred_2021_auditores <- coop_cred_2021_auditores |>
    dplyr::select(cnpj, auditor_independente, big_four, uf,
-                 numero_agencias, ativo_total, passivo_total,
+                 numero_agencias, ativo_total, patrimonio_liquido,
                  filiacao)
 
 ```
@@ -166,25 +166,124 @@ resumo_categorica(coop_cred_2021_auditores, filiacao)
 
 resumo_categorica(coop_cred_2021_auditores, uf)
 
+```
+
+
+```{r tabela_prop_bigfour, echo = FALSE}
+
 coop_cred_2021_auditores |> 
   janitor::tabyl(big_four) |> 
-  kableExtra::kable(format = "pipe")
+  kableExtra::kable(format = "pipe", 
+                    caption = "Proporção de Cooperativas de Crédito 
+                    Auditadas por Big Four")
 
 ```
 
 
+Como podemos observar na tabela acima, das `r nrow(coop_cred_2021_auditores)` cooperativas da amostra, apenas `r nrow(coop_cred_2021_auditores |> dplyr::filter(big_four == 1))` são auditadas por uma empresa considerada *Big Four*.
+
 ### Correlação entre variáveis
 
-Associação entre variáveis qualitativas (x-quadrado e pearson)
+Nesta parte iremos testar se existe ou não correlação entre as variáveis que iremos utilizar. Iremos testar tanto as variáveis qualitaticas (categóricas) quanto as quantitativas (numéricas), e as duas juntas. Pra isso iremos utilizar os testes $\chi^2$, **Pearson**, $R^2$, **covariância** e **correlação**.
 
-Associação entre variáveis qualitativas e quantitativas (r2)
+ - Associação entre variáveis qualitativas ( $\chi^2$ e Pearson)
 
-Assocoação entre variáveis quantitativas (covariância e correlação)
+```{r chi_quadrado}
+
+chisq_filiacao <- chisq.test(
+  coop_cred_2021_auditores$big_four,
+  coop_cred_2021_auditores$filiacao
+)
+
+print(chisq_filiacao)
+
+chisq_uf <- chisq.test(
+  coop_cred_2021_auditores$big_four,
+  coop_cred_2021_auditores$uf
+)
+
+print(chisq_uf)
+
+```
+
+Como podemos observar nos resultados dos testes $\chi^2$ acima, o temos que os p-valores são de `r chisq_filiacao$p.value`, e `r chisq_uf$p.value`. Ou seja, menores que 0,05. Isso indica que existem diferenças de filiação e UF entre os grupos, auditados por *Big Four* e auditados por outras empresas.
+
+Agora, para verificar se existem correlações entre as variáveis, temos que realizar o teste de *Pearson*
+
+
+
+TESTAR GOF TESTE DE CORRELAÇÃO
+
+
+ - Assocoação entre variáveis quantitativas (covariância e correlação)
+
+
+```{r}
+
+# Diferença entre grupos
+
+chisq.test(
+  coop_cred_2021_auditores$big_four,
+  coop_cred_2021_auditores$patrimonio_liquido
+)
+
+chisq.test(
+  coop_cred_2021_auditores$big_four,
+  coop_cred_2021_auditores$ativo_total
+)
+
+
+
+# Correlação
+cor(
+  coop_cred_2021_auditores |> dplyr::filter(big_four == 0) |> dplyr::select(patrimonio_liquido),
+  coop_cred_2021_auditores |> dplyr::filter(big_four == 0) |> dplyr::select(ativo_total),
+  method = "pearson"
+)
+
+cor(
+  coop_cred_2021_auditores |> dplyr::filter(big_four == 1) |> dplyr::select(patrimonio_liquido),
+  coop_cred_2021_auditores |> dplyr::filter(big_four == 1) |> dplyr::select(ativo_total),
+  method = "pearson"
+)
+
+
+# Covariância
+
+cov(
+  coop_cred_2021_auditores$patrimonio_liquido,
+  coop_cred_2021_auditores$ativo_total
+)
+
+
+```
+
+
+ - Associação entre variáveis qualitativas e quantitativas (r2)
+
+```{r}
+# R2
+lm(patrimonio_liquido ~ big_four, coop_cred_2021_auditores) |> summary()
+
+```
 
 
 ### Análise gráfica
 
 
+```{r}
+
+coop_cred_2021_auditores |>
+   ggplot2::ggplot() +
+   ggplot2::aes(x = patrimonio_liquido, y = big_four) +
+   ggplot2::geom_point(colour = "#011e5a") +
+   ggplot2::xlab("Patrimônio Líquido") +
+   ggplot2::ylab("Big Four") +
+   ggplot2::labs(title = "Relação PL x Big Four") +
+   ggplot2::geom_smooth(method = "lm", se = FALSE)
+
+
+```
 
 
 
