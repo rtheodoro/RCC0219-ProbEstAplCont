@@ -208,11 +208,10 @@ print(chisq_uf)
 
 Como podemos observar nos resultados dos testes $\chi^2$ acima, o temos que os p-valores são de `r chisq_filiacao$p.value`, e `r chisq_uf$p.value`. Ou seja, menores que 0,05. Isso indica que existem diferenças de filiação e UF entre os grupos, auditados por *Big Four* e auditados por outras empresas.
 
-Agora, para verificar se existem correlações entre as variáveis, temos que realizar o teste de *Pearson*
+Agora, para verificar se existem correlações entre as variáveis, temos que realizar o teste de *Pearson*.
 
 
-
-TESTAR GOF TESTE DE CORRELAÇÃO
+TESTAR GoodnessOfFit - TESTE DE CORRELAÇÃO
 
 
  - Assocoação entre variáveis quantitativas (covariância e correlação)
@@ -232,7 +231,10 @@ chisq.test(
   coop_cred_2021_auditores$ativo_total
 )
 
+``` 
+Neste dois casos, como o p-valor de ambos não são menores que 0,05, significa que as distribuições de ambos os grupos são iguais.
 
+```{r}
 
 # Correlação
 cor(
@@ -247,6 +249,10 @@ cor(
   method = "pearson"
 )
 
+```
+Quanto mais próximo de 1, melhor. Neste caso, podemos observar que em ambos os grupos, quanto maior é o Ativo Total, maior é o Patrimônio Líquido.
+
+```{r}
 
 # Covariância
 
@@ -255,23 +261,25 @@ cov(
   coop_cred_2021_auditores$ativo_total
 )
 
-
 ```
 
+Alta covariância.
 
- - Associação entre variáveis qualitativas e quantitativas (r2)
+ - Associação entre variáveis qualitativas e quantitativas ($R^2$)
 
 ```{r}
 # R2
-lm(patrimonio_liquido ~ big_four, coop_cred_2021_auditores) |> summary()
+r2 <- lm(patrimonio_liquido ~ big_four, coop_cred_2021_auditores) |> summary()
 
+r2$r.squared
 ```
 
+Quanto mais próximo de 1, melhor. Neste caso, vemos que o $R^2$ é de `r r2$r.squared`, o que significa que o fato da cooperativa de crédito ser auditada por uma *Big Four* não tem relação com seu tamanho.
+ 
 
 ### Análise gráfica
 
-
-```{r}
+```{r g_plxbigfour, fig.cap = "Relação PL x Big Four", message = FALSE}
 
 coop_cred_2021_auditores |>
    ggplot2::ggplot() +
@@ -279,9 +287,7 @@ coop_cred_2021_auditores |>
    ggplot2::geom_point(colour = "#011e5a") +
    ggplot2::xlab("Patrimônio Líquido") +
    ggplot2::ylab("Big Four") +
-   ggplot2::labs(title = "Relação PL x Big Four") +
    ggplot2::geom_smooth(method = "lm", se = FALSE)
-
 
 ```
 

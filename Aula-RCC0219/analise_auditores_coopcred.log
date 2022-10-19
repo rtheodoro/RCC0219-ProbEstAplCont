@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.10.19)  19 OCT 2022 15:19
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.10.19)  19 OCT 2022 19:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -976,25 +976,38 @@ Underfull \hbox (badness 1502) in paragraph at lines 213--223
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 213--223
-\TU/TimesNewRoman(0)/b/n/10 ativo_total, passivo_total, patrimonio_liquido, despesas_operacionais, receitas_operacionais, deposi-
+Underfull \hbox (badness 1137) in paragraph at lines 213--223
+\TU/TimesNewRoman(0)/b/n/10 ativo_total, patrimonio_liquido, despesas_operacionais, receitas_operacionais, depositos_totais, caixa, dis-
+ []
+
+
+Underfull \hbox (badness 1320) in paragraph at lines 213--223
+\TU/TimesNewRoman(0)/b/n/10 ponibilidades, sobras, pecld, capital_social, compensacao, carteira_credito, classificacao_carteira_credito,
  []
 
 [2]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 299.
-[3] [4] [5] [6] [7] (./analise_auditores_coopcred.aux)
+[3] [4] [5] [6]
+Overfull \hbox (5.71877pt too wide) in paragraph at lines 688--688
+[]\TU/lmtt/m/n/10 ## data:  coop_cred_2021_auditores$big_four and coop_cred_2021_auditores$patrimonio_liquido[] 
+ []
+
+[7] [8]
+File: analise_auditores_coopcred_files/figure-latex/g_plxbigfour-1.pdf Graphic file (type pdf)
+<use analise_auditores_coopcred_files/figure-latex/g_plxbigfour-1.pdf>
+[9] (./analise_auditores_coopcred.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 20302 strings out of 477727
- 370140 string characters out of 5842982
+ 20313 strings out of 477727
+ 370721 string characters out of 5842982
  896672 words of memory out of 5000000
- 41040 multiletter control sequences out of 15000+600000
+ 41048 multiletter control sequences out of 15000+600000
  475912 words of font info for 94 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  86i,9n,122p,531b,455s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on analise_auditores_coopcred.pdf (7 pages).
+Output written on analise_auditores_coopcred.pdf (9 pages).
