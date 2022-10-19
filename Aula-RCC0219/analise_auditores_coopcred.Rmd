@@ -6,6 +6,8 @@ output:
   pdf_document:
     latex_engine: xelatex
     highlight: zenburn
+    toc: true
+    toc_depth: 3
 geometry: left=2.5cm,right=2.5cm,top=2cm,bottom=2cm
 header-includes:
   - \usepackage{fontspec}
@@ -16,7 +18,7 @@ header-includes:
   - \setmainfont{Times New Roman}
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 # incluse = FALSE - não exibe o código no texto
 
 # aqui iremos adicionar as configurações do markdown
@@ -41,10 +43,12 @@ O objetivo deste *script* é analisar os dados que envolvem os auditores indepen
 
 Nesta base de dados estão apenas as cooperativas de crédito que informaram seus auditores independentes ao BACEN em 2021, as que não informaram foram retiradas.
 
-Os pacotes utilizados são:
+
+## Metodologia
+
+Os pacotes utilizados estão listados no *chunk*^[Trecho de código que pode ou não ser exibido no relatório, assim como pode estar ativo ou não.] abaixo. Esse *chunk* não irá o código, apenas exibir seu conteúdo. Caso você não tenha algum destes pacotes instalado, estas linhas devem ser rodadas manualmente, antes de gerar o relatório.
 
 ```{r instalando_pacotes, eval = FALSE}
-
 # eval = FALSE mostra o código, mas não roda
 
 # Pacotes
@@ -54,12 +58,9 @@ install.packages("janitor")
 install.packages("kableExtra")
 install.packages("tidyselect")
 
-# Rode manualmente apenas aqueles que você não tem
-# instalados no seu computador
-
 ```
 
-## Importação de dados
+### Importação e tratamento de dados
 
 O primeiro passo para o tratamento da base é importar os dados, para isso vamos utilizar o *chunk* abaixo.
 
@@ -171,16 +172,20 @@ coop_cred_2021_auditores |>
 
 ```
 
-## Análise gráfica
+
+### Correlação entre variáveis
+
+Associação entre variáveis qualitativas (x-quadrado e pearson)
+
+Associação entre variáveis qualitativas e quantitativas (r2)
+
+Assocoação entre variáveis quantitativas (covariância e correlação)
 
 
-Gerando box-plot das variáveis numéricas:
-
-```{r boxplot}
-
-boxplot(coop_cred_2021_auditores$numero_agencias)
+### Análise gráfica
 
 
-```
+
+
 
 
