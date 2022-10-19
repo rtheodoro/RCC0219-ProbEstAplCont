@@ -1,8 +1,19 @@
 ---
 title: "Análise dos auditores das Cooperativas de Crédito em 2021"
 author: "Ricardo Theodoro"
-date: "2022-10-18"
-output: pdf_document
+date:  "`r format(Sys.time(), '%d de %B de %Y')`"
+output: 
+  pdf_document:
+    latex_engine: xelatex
+    highlight: zenburn
+geometry: left=2.5cm,right=2.5cm,top=2cm,bottom=2cm
+header-includes:
+  - \usepackage{fontspec}
+  - \usepackage{graphicx}
+  - \usepackage{float}
+  - \usepackage{amsmath}
+  - \usepackage[brazil]{babel}
+  - \setmainfont{Times New Roman}
 ---
 
 ```{r setup, include=FALSE}
@@ -15,6 +26,12 @@ options(scipen = 6, digits = 4) # Transforma notação científica em número in
 
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+## Introdução
+
+Aqui iremos aprender a criar um relatório automatizado para análise de dados.
+
+Além do que veremos neste *script*, você pode continuar estudando em [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)
 
 ## Objetivo
 
@@ -32,10 +49,12 @@ Os pacotes utilizados para alcançarmos estes objetivos serão:
 install.packages("dplyr")
 install.packages("glue")
 install.packages("janitor")
+install.packages("kableExtra")
+install.packages("tidyselect")
 
-
+# Rode manualmente apenas aqueles que você não tem
+# instalados no seu computador
 ```
-
 
 ## Importação de dados
 
@@ -59,26 +78,27 @@ dplyr::glimpse(coop_cred_2021_auditores)
 
 ```{r selecionando_colunas}
 coop_cred_2021_auditores <- coop_cred_2021_auditores |>
-   dplyr::select(cnpj, auditor_independente, big_four, uf, numero_agencias, 
-                 ativo_total, passivo_total, filiacao)
+   dplyr::select(cnpj, auditor_independente, big_four, uf,
+                 numero_agencias, ativo_total, passivo_total,
+                 filiacao)
 ```
 
 Agora, vamos analisar as estatísticas descritivas das variáveis numéricas e verificar se estão no formato correto para uso:
 
-```{r}
-library(tidyselect)
+```{r results = 'asis'}
 
 coop_cred_2021_auditores |>
-   dplyr::select(where(is.double), -cnpj) |> 
-   summary()
-
-# A função `where` não funciona no formato
-#  tidyselect::where(), por isso usamos o library()
+  dplyr::select(-cnpj) |>
+  stargazer::stargazer(
+    title = "Resumo de Resultados",
+    summary = TRUE,
+    iqr = TRUE,
+    flip = TRUE,
+    header = FALSE
+  )
+  
 
 # Removemos o cnpj pois ele serve apenas para identificação
-
-
-
 ```
 
 Aqui, podemos observar que nem todas as variáveis que contém números estão classificadas como numéricas, para isso precisamos transformá-las
@@ -89,7 +109,6 @@ Aqui, podemos observar que nem todas as variáveis que contém números estão c
 coop_cred_2021_auditores$big_four <- as.numeric(coop_cred_2021_auditores$big_four)
 
 # Segunda forma
-
 coop_cred_2021_auditores <- coop_cred_2021_auditores |>
    dplyr::mutate(
       numero_agencias = as.numeric(numero_agencias )
@@ -99,14 +118,47 @@ coop_cred_2021_auditores <- coop_cred_2021_auditores |>
 
 Agora, rodamos novamente o código para obtermos as estatísticas descritivas das variáveis numéricas
 
-```{r}
+```{r resumo_numerico_completo, results = 'asis'}
 coop_cred_2021_auditores |>
-   dplyr::select(where(is.double), -cnpj) |> # aqui removemos o cnpj pois ele serve apenas para identificação
-   summary()
+  dplyr::select(-cnpj) |>
+  stargazer::stargazer(
+    title = "Resumo de Resultados",
+    summary = TRUE,
+    iqr = TRUE,
+    flip = TRUE,
+    header = FALSE
+  )
 ```
 
 
+Agora iremos analisar as variáveis categóricas, da seguinte forma:
 
-## Exploração de dados
+```{r resumo_quali}
+
+# Função
+resumo_categorica <- function(data, var) {
+  data |>
+    dplyr::group_by({
+      {
+        var
+      }
+    }) |>
+    dplyr::count() |>
+    dplyr::arrange(-n) |>
+    janitor::adorn_totals()
+}
+
+
+resumo_categorica(coop_cred_2021_auditores, auditor_independente)
+
+resumo_categorica(coop_cred_2021_auditores, filiacao)
+
+resumo_categorica(coop_cred_2021_auditores, uf)
+```
 
 ## Análise gráfica
+
+
+Gerando box-plot 
+
+
