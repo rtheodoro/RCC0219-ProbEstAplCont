@@ -31,7 +31,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Aqui iremos aprender a criar um relatório automatizado para análise de dados.
 
-Além do que veremos neste *script*, você pode continuar estudando em [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)
+Além do que veremos neste *script*, você pode continuar estudando em [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/).
+
+Neste *script* as análises e tratamentos não serão completas e detalhadas, serão apenas exemplos para que você possa criar seus relatórios utilizando os conhecimentos adquirios nas aulas passadas e, também, no decorrer desta.
 
 ## Objetivo
 
@@ -39,13 +41,13 @@ O objetivo deste *script* é analisar os dados que envolvem os auditores indepen
 
 Nesta base de dados estão apenas as cooperativas de crédito que informaram seus auditores independentes ao BACEN em 2021, as que não informaram foram retiradas.
 
-Os pacotes utilizados para alcançarmos estes objetivos serão:
+Os pacotes utilizados são:
 
 ```{r instalando_pacotes, eval = FALSE}
+
 # eval = FALSE mostra o código, mas não roda
 
 # Pacotes
-
 install.packages("dplyr")
 install.packages("glue")
 install.packages("janitor")
@@ -54,6 +56,7 @@ install.packages("tidyselect")
 
 # Rode manualmente apenas aqueles que você não tem
 # instalados no seu computador
+
 ```
 
 ## Importação de dados
@@ -61,26 +64,34 @@ install.packages("tidyselect")
 O primeiro passo para o tratamento da base é importar os dados, para isso vamos utilizar o *chunk* abaixo.
 
 ```{r importa_base}
+
 # Importando a base
-coop_cred_2021_auditores <- read.csv("data_raw/coop_cred_2021_auditores.csv") |>
-   janitor::clean_names()
+coop_cred_2021_auditores <-
+  read.csv("data_raw/coop_cred_2021_auditores.csv") |>
+  janitor::clean_names()
+
 ```
 
 Como é possível observar, nossa base de dados possui `r ncol(coop_cred_2021_auditores)` variáveis, sendo elas: **`r names(coop_cred_2021_auditores) |> glue::glue_collapse(", ", last = " e ")`**.
 
 Agora, vamos ver um resumo dos dados importados para escolhermos quais variáveis iremos utilizar e quais precisaremos tratar.
 
-```{r resumo_dados}
+```{r resumo_dados, comment = NA}
+# comment = NA  remove as '#' quando exibe os resultados
+
 dplyr::glimpse(coop_cred_2021_auditores)
+
 ```
 
 É possível observar que temos tanto variáveis categóricas (`chr`) quanto numéricas (`dbl` e `int`). Será preciso verificar se todas estão no formato correto. E, como nós não iremos utilizar todos os dados, então vamos selecionar apenas as colunas de interesse, que são:
 
 ```{r selecionando_colunas}
+
 coop_cred_2021_auditores <- coop_cred_2021_auditores |>
    dplyr::select(cnpj, auditor_independente, big_four, uf,
                  numero_agencias, ativo_total, passivo_total,
                  filiacao)
+
 ```
 
 Agora, vamos analisar as estatísticas descritivas das variáveis numéricas e verificar se estão no formato correto para uso:
@@ -90,15 +101,15 @@ Agora, vamos analisar as estatísticas descritivas das variáveis numéricas e v
 coop_cred_2021_auditores |>
   dplyr::select(-cnpj) |>
   stargazer::stargazer(
-    title = "Resumo de Resultados",
+    title = "Estatístias Descritivas das variáveis numéricas - pré-tratamento",
     summary = TRUE,
     iqr = TRUE,
     flip = TRUE,
     header = FALSE
   )
   
-
 # Removemos o cnpj pois ele serve apenas para identificação
+
 ```
 
 Aqui, podemos observar que nem todas as variáveis que contém números estão classificadas como numéricas, para isso precisamos transformá-las
@@ -110,55 +121,66 @@ coop_cred_2021_auditores$big_four <- as.numeric(coop_cred_2021_auditores$big_fou
 
 # Segunda forma
 coop_cred_2021_auditores <- coop_cred_2021_auditores |>
-   dplyr::mutate(
-      numero_agencias = as.numeric(numero_agencias )
-   )
+  dplyr::mutate(numero_agencias = as.numeric(numero_agencias))
 
 ```
 
 Agora, rodamos novamente o código para obtermos as estatísticas descritivas das variáveis numéricas
 
 ```{r resumo_numerico_completo, results = 'asis'}
+
 coop_cred_2021_auditores |>
   dplyr::select(-cnpj) |>
   stargazer::stargazer(
-    title = "Resumo de Resultados",
+    title = "Estatísticas Descritivas das Variáveis Numéricas",
     summary = TRUE,
     iqr = TRUE,
     flip = TRUE,
     header = FALSE
   )
+
 ```
 
 
 Agora iremos analisar as variáveis categóricas, da seguinte forma:
 
-```{r resumo_quali}
+```{r resumo_quali, comment = NA}
 
 # Função
 resumo_categorica <- function(data, var) {
+  teste <- tidyselect::enquo(var) |> rlang::as_name()
+  
   data |>
-    dplyr::group_by({
-      {
-        var
-      }
-    }) |>
+    dplyr::group_by({{ var }}) |>
     dplyr::count() |>
     dplyr::arrange(-n) |>
-    janitor::adorn_totals()
+    janitor::adorn_totals() |> 
+    kableExtra::kable(format = "pipe", 
+                      caption = glue::glue("Informações de {teste}"))
 }
 
-
-resumo_categorica(coop_cred_2021_auditores, auditor_independente)
+resumo_categorica(coop_cred_2021_auditores, auditor_independente) 
 
 resumo_categorica(coop_cred_2021_auditores, filiacao)
 
 resumo_categorica(coop_cred_2021_auditores, uf)
+
+coop_cred_2021_auditores |> 
+  janitor::tabyl(big_four) |> 
+  kableExtra::kable(format = "pipe")
+
 ```
 
 ## Análise gráfica
 
 
-Gerando box-plot 
+Gerando box-plot das variáveis numéricas:
+
+```{r boxplot}
+
+boxplot(coop_cred_2021_auditores$numero_agencias)
+
+
+```
 
 
