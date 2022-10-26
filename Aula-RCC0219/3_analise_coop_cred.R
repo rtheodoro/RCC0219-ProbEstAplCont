@@ -16,21 +16,19 @@
 # Notas: Este script contém o que está no arquivo analise_auditores_coopcred.Rmd
 #
 #--------------------------------------------------------------------------#
-options(scipen = 6, digits = 4)
+options(scipen = 6, digits = 2)
 #--------------------------------------------------------------------------#
-
-
 
 
 # Pacotes utilizados ------------------------------------------------------
 
-install.packages("dplyr")
-install.packages("glue")
-install.packages("janitor")
-install.packages("kableExtra")
-install.packages("tidyselect")
+# install.packages("dplyr")
+# install.packages("glue")
+# install.packages("janitor")
+# install.packages("kableExtra")
+# install.packages("tidyselect")
 
-
+library(tidyselect)
 
 # Importando a base -------------------------------------------------------
 
@@ -48,39 +46,34 @@ dplyr::glimpse(coop_cred_2021_auditores)
 
 # Exportando uma tabela em formato latex
 coop_cred_2021_auditores <- coop_cred_2021_auditores |>
-  dplyr::select(
-    cnpj,
-    auditor_independente,
-    big_four,
-    uf,
-    numero_agencias,
-    ativo_total,
-    patrimonio_liquido,
-    filiacao
-  )
+  dplyr::select(cnpj,
+                big_four,
+                uf,
+                numero_agencias,
+                ativo_total,
+                patrimonio_liquido,
+                filiacao)
 
 coop_cred_2021_auditores |>
-  dplyr::select(-cnpj) |>
-  stargazer::stargazer(
-    title = "Estatístias Descritivas das variáveis numéricas - pré-tratamento",
-    summary = TRUE,
-    iqr = TRUE,
-    flip = TRUE,
-    header = FALSE
-  )
+  dplyr::select(-cnpj, -big_four) |>
+  dplyr::select(where(is.numeric)) |>
+  summary()
 
+# Os números estão sem as casas decimais
 
+coop_cred_2021_auditores <-
+  coop_cred_2021_auditores |> dplyr::mutate(dplyr::across(
+    where(is.numeric) &
+      !c(cnpj, big_four, numero_agencias),
+    .fns = ~ . / 100
+  ))
 
-# Transformando colunas em numéricas --------------------------------------
+# Estatísticas descritivas
 
-# Primeira forma
-coop_cred_2021_auditores$big_four <-
-  as.numeric(coop_cred_2021_auditores$big_four)
-
-# Segunda forma
-coop_cred_2021_auditores <- coop_cred_2021_auditores |>
-  dplyr::mutate(numero_agencias = as.numeric(numero_agencias))
-
+coop_cred_2021_auditores |>
+  dplyr::select(-cnpj, -big_four) |>
+  dplyr::select(where(is.numeric)) |>
+  summary()
 
 
 # Visualizando variáveis categóricas --------------------------------------
@@ -91,55 +84,114 @@ resumo_categorica <- function(data, var) {
   teste <- tidyselect::enquo(var) |> rlang::as_name()
   
   data |>
-    dplyr::group_by({{ var }}) |>
+    dplyr::group_by({
+      {
+        var
+      }
+    }) |>
     dplyr::count() |>
     dplyr::arrange(-n) |>
-    janitor::adorn_totals() 
+    janitor::adorn_totals()
 }
 
-resumo_categorica(coop_cred_2021_auditores, auditor_independente) 
 
 resumo_categorica(coop_cred_2021_auditores, filiacao)
 
 resumo_categorica(coop_cred_2021_auditores, uf)
 
 
-coop_cred_2021_auditores |> 
+coop_cred_2021_auditores |>
   janitor::tabyl(big_four)
 
 
+# Agrupando valores -------------------------------------------------------
+
+# Agrupando valores de colunas ----
+
+coop_cred_2021_auditores |>
+  dplyr::group_by(big_four, uf) |>
+  dplyr::count() |>
+  print(n = Inf )
+
+# Filtrando valores ----
+
+coop_cred_2021_auditores |>
+  dplyr::filter(uf == "SP" | uf == "SC") |>
+  dplyr::group_by(big_four, uf) |>
+  dplyr::count() |>
+  print(n = Inf )
 
 
-#  Associação entre variáveis qualitativas ( $\chi^2$ e Pearson) ----------
+## Histograma - gráfico de densidade/frequência ---------------------------
 
-chisq_filiacao <- chisq.test(
-  coop_cred_2021_auditores$big_four,
-  coop_cred_2021_auditores$filiacao
+hist(
+  coop_cred_2021_auditores$ativo_total,
+  freq = FALSE,
+  main = "Distribuição do Ativo Total",
+  ylab = "Densidade",
+  xlab = "Valores do Ativo Total"
 )
+
+# Teste de normalidade
+shapiro.test(coop_cred_2021_auditores$ativo_total) # p-valor < 0,05 -> A distribuição não é normal
+
+hist(
+  coop_cred_2021_auditores$patrimonio_liquido,
+  freq = FALSE,
+  main = "Distribuição do Patrimônio Líquido",
+  ylab = "Densidade",
+  xlab = "Valores do Patrimônio Líquido"
+)
+
+# Teste de normalidade
+shapiro.test(coop_cred_2021_auditores$patrimonio_liquido) # p-valor < 0,05 -> A distribuição não é normal
+
+## Boxplot - visualização dos quartis ------------------------------------
+
+boxplot(
+  coop_cred_2021_auditores$ativo_total,
+  main = "Boxplot do Ativo Total",
+  ylab = "Ativo Total",
+  xlab = "Distribuição",
+  col = "darkgreen"
+)
+
+
+boxplot(
+  coop_cred_2021_auditores$patrimonio_liquido,
+  main = "Boxplot do Patrimônio Líquido",
+  ylab = "Patrimônio Líquido",
+  xlab = "Distribuição",
+  col = "darkgreen"
+)
+
+
+# Removendo outliers
+
+!ativo_total_1m %in% boxplot.stats(ativo_total)$out
+
+
+# Associação entre variáveis qualitativas (chi2 e Pearson) ----------
+
+chisq_filiacao <- chisq.test(coop_cred_2021_auditores$big_four,
+                             coop_cred_2021_auditores$filiacao)
 
 print(chisq_filiacao)
 
-chisq_uf <- chisq.test(
-  coop_cred_2021_auditores$big_four,
-  coop_cred_2021_auditores$uf
-)
+chisq_uf <- chisq.test(coop_cred_2021_auditores$big_four,
+                       coop_cred_2021_auditores$uf)
 
 print(chisq_uf)
-
 
 
 # Assocoação entre variáveis quantitativas (covariância e correlaç --------
 
 
-chisq.test(
-  coop_cred_2021_auditores$big_four,
-  coop_cred_2021_auditores$patrimonio_liquido
-)
+chisq.test(coop_cred_2021_auditores$big_four,
+           coop_cred_2021_auditores$patrimonio_liquido)
 
-chisq.test(
-  coop_cred_2021_auditores$big_four,
-  coop_cred_2021_auditores$ativo_total
-)
+chisq.test(coop_cred_2021_auditores$big_four,
+           coop_cred_2021_auditores$ativo_total)
 
 # Correlação
 cor(
@@ -162,8 +214,9 @@ cov(
 )
 
 
-#  Associação entre variáveis qualitativas e quantitativas ($R^2$) --------
+# Associação entre variáveis qualitativas e quantitativas (R^2) --------
 
-r2 <- lm(patrimonio_liquido ~ big_four, coop_cred_2021_auditores) |> summary()
+r2 <-
+  lm(patrimonio_liquido ~ big_four, coop_cred_2021_auditores) |> summary()
 
-r2$r.squared
+r2$r.squared # quanto maior, melhor
