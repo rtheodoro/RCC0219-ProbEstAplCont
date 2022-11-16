@@ -313,5 +313,33 @@ coop_cred_2021_auditores |>
 
 # Ver: https://bookdown.org/matheusogonzaga/apostila_r2/distribuicoes-de-probabilidade.html
 
+# Exemplos de uso
+
+# Binomial ----------------------------------------------------------------
+
+
+# Suponha que na nossa amostra de 392 cooperativas, n = 392, estejamos interessados na
+# probabilidade de encontrarmos 10 cooperativas auditadas por big four, k = 10, com
+# p = 0.05.
+# Calculamos a probabilidade P(X = 8 ) da seguinte maneira:
+
+dbinom(x = 10, size = 392, prob = 0.05)
+
+# Desta vez, queremos encontrar a probabilidade de no máximo 10 cooperativas da
+# nossa amostra serem auditadas por big four, ou seja, estamos interessados na
+# probabilidade acumulada da binomial com n = 10 e p = 0.05 avaliada no caso em que X = 10.
+
+# Buscamos a probabilidade da ocorrência de 10, 9, 8, 7,…, 2, 1 e 0 sucessos, P(X ≤ 10)
+pbinom(q = 10, size = 392, prob = 0.05)
+
+# Para ser >10, basta subtrair 1 do resultado ou adicionar o parâmetro lower.tail = FALSE
+
+
+#  Se queremos o quantil referente ao percentil de ordem 0.95, estamos
+# interessados num determinado valor de sucessos que seja maior do que 95% dos
+# valores de sucesso possíveis.
+qbinom(p = 0.95, size = 392, prob = 0.05)
+
+
 
 
