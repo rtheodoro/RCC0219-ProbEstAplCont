@@ -311,7 +311,7 @@ coop_cred_2021_auditores |>
 
 # Distribuições de Probabilidade -------------------------------------------
 
-
+# Ver: https://bookdown.org/matheusogonzaga/apostila_r2/distribuicoes-de-probabilidade.html
 
 
 

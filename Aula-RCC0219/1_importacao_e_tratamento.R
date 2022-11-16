@@ -6,6 +6,8 @@
 #
 # -------------------------------------------------------------------------#
 
+# Ver: https://livro.curso-r.com/ 
+# Ver: https://bookdown.org/matheusogonzaga/apostila_r2/
 
 # Pacotes utilizados ------------------------------------------------------
 

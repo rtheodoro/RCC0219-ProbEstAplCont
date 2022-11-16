@@ -2,11 +2,12 @@
 # Bernoulli
 # Binomial
 # Poisson
-# Hipergeometrica
 
-
+# Ver: https://bookdown.org/matheusogonzaga/apostila_r2/distribuicoes-de-probabilidade.html
 
 # Visualização das distribuições ------------------------------------------
+
+# Apenas rodar essa parte, não precisa entrar em detalhes do código aqui
 
 ## Função para gerar os gráficos ----
 
