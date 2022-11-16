@@ -57,8 +57,9 @@ execute:
 
 ## Onde continuar estudando?
 
--   [R for Data Science](https://r4ds.had.co.nz/)
 -   [Ciência de Dados em R](https://livro.curso-r.com/)
+-   [Introdução ao R para alunos de ciências exatas](https://bookdown.org/matheusogonzaga/apostila_r2/)
+-   [R for Data Science](https://r4ds.had.co.nz/)
 -   [Zen do R](https://curso-r.github.io/zen-do-r/index.html)
 
 ## Onde tirar dúvidas?

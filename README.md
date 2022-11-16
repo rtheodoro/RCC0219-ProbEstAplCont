@@ -24,6 +24,8 @@ Na pasta [`Aula-RCC0219`](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/tr
 
 [Curso-r](https://curso-r.com/)
 
+[Introdução ao R para alunos de ciências exatas](https://bookdown.org/matheusogonzaga/apostila_r2/)
+
 [R for Data Science](https://r4ds.had.co.nz/)
 
 [Tidyverse](https://www.tidyverse.org/learn/)
