@@ -321,7 +321,7 @@ coop_cred_2021_auditores |>
 # Suponha que na nossa amostra de 392 cooperativas, n = 392, estejamos interessados na
 # probabilidade de encontrarmos 10 cooperativas auditadas por big four, k = 10, com
 # p = 0.05.
-# Calculamos a probabilidade P(X = 8 ) da seguinte maneira:
+# Calculamos a probabilidade P(X = 10) da seguinte maneira:
 
 dbinom(x = 10, size = 392, prob = 0.05)
 

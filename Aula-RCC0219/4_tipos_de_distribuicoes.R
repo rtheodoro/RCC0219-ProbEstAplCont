@@ -2,6 +2,16 @@
 # Bernoulli
 # Binomial
 # Poisson
+# logistica ##### FAZER
+
+# Função de probabilidade e distribuição acumulado ####
+# Valor esperado e variância ####
+
+# Falar da média e variância dos tipos de distribuição
+
+# Normal padrão
+# chi quadrado #### FAZER
+
 
 # Ver: https://bookdown.org/matheusogonzaga/apostila_r2/distribuicoes-de-probabilidade.html
 
