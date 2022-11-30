@@ -2,18 +2,13 @@
 # Bernoulli
 # Binomial
 # Poisson
-# logistica ##### FAZER
-
-# Função de probabilidade e distribuição acumulado ####
-# Valor esperado e variância ####
-
-# Falar da média e variância dos tipos de distribuição
-
+# logistica 
 # Normal padrão
-# chi quadrado #### FAZER
+# Chi quadrado 
 
 
 # Ver: https://bookdown.org/matheusogonzaga/apostila_r2/distribuicoes-de-probabilidade.html
+# Ver: https://bookdown.org/thalita_dobem/Apostila/intro.html
 
 # Visualização das distribuições ------------------------------------------
 
@@ -78,6 +73,26 @@ pois_sum <- function(lambda, lb, ub, col = 4, lwd = 1, ...) {
    lines(dpois(x, lambda = lambda), type = "h",
          col =  color, lwd = lwd, ...)
 }
+
+
+
+
+
+## Normal Padrão ---------------------------------------------
+
+# Exemplo
+x <- rnorm(n, mean, sd) # rnorm é a função que simula variáveis normais
+x <- rnorm(sd = 2, n = 100) # n é o tamanho da amostra (x será um vetor caso n > 1), e mean e sd são parâmetros (opcionais) dando a média e o desvio-padrão da normal. Se mean ou sd forem omitidos, serão usados os valores, respectivamente, de 0 e 1. 
+hist(x)
+
+x <- seq(-6, 6, by=0.1)
+y <- dnorm(x) # dnorm é a função que dá a densidade da normal
+plot(x, y, type="l")
+
+x <- seq(-6, 6, by=0.1)
+y <- pnorm(x) # pnorm é a função que dá a função de probabilidade acumulada da normal.
+plot(x, y, type="l")
+
 
 
 ## Bernoulli --------------------------------------------------------------
@@ -312,3 +327,87 @@ sum(dpois(11:20, lambda = 15)) # Equivalente
 
 pois_sum(lambda = 15, lb = 10, ub = 20, lwd = 2,
          ylab = "P(X = x)", xlab = "Visitas por hora")
+
+
+## Chi Quadrado ------------------------------------------------------------
+
+
+# # dchisq fornece a função de densidade. 
+# Ou seja, é usado para calcular a probabilidade cumulativa
+ 
+df <- 6
+vec <- 1:4
+
+dchisq(x = vec, df = df) # x - vetor de quantis, df - graus de liberdade
+
+# pchisq fornece a função de distribuição.
+# dchisq (x, df) nos dá a probabilidade de χ2 com equivalente a um valor 
+# de x quando o grau de liberdade é df.
+
+# Graus de liberdade
+df <- 5
+
+# Calculando valores para o intervalo [0,5]
+pchisq(5, df = df, lower.tail = TRUE)
+
+# Calculando valores para o intervalo [5,inf)
+pchisq(5, df = df, lower.tail = FALSE)
+
+# rchisq (n, df) retorna n números aleatórios da distribuição qui-quadrado.
+# É, portanto, para gerar desvios aleatórios.
+
+x <- rchisq(50000, df = 5)
+
+hist(x, 
+     freq = FALSE, 
+     xlim = c(0,16), 
+     ylim = c(0,0.2))
+
+curve(dchisq(x, df = 5), from = 0, to = 15, 
+      n = 5000, col= 'red', lwd=2, add = T)
+
+
+
+## Logistica ---------------------------------------------------------------
+
+
+# Ver: https://www.vrcbuzz.com/logistic-distribution-probabilities-using-r/
+
+mu <- 1
+
+lambda <- 2
+
+# Gerando valores aleatórios
+
+n <- 1000 # Tamanho da amostra
+
+x_sim <- rlogis(n,mu,lambda) # gerando valores aleatórios
+
+plot(density(x_sim),xlab="Simulado x",ylab="Densidade",
+     lwd=5,col="darkred",
+     main=expression(paste("Dados simulados(",
+                           mu,"=1, ",lambda,"=2)")))
+
+
+# Função de Distribuição Probabilidade
+
+x <- seq(-10, 14, by = 0.02)
+
+px <- dlogis(x, mu, lambda) 
+
+plot(x,px,type="l",xlim=c(-10,14),ylim=c(0,max(px)),
+     lwd=3, col="darkred",ylab="f(x)",
+     main=expression(paste("FDP (",
+                           mu,"=1, ",lambda,"=2)")))
+abline(v=c(1),lty=2,col="gray")
+
+# Função de probabilidade acumulada
+
+x <- seq(-10,14, by=0.02)
+Fx <- plogis(x,mu,lambda)
+
+plot(x,Fx,type="l",xlim=c(-10,14),ylim=c(0,1),
+     lwd=3, col="darkred",ylab="F(x)",
+     main=expression(paste("Probabilidade Acumulada (",mu,"=1, ",lambda,"=2)")))
+
+
