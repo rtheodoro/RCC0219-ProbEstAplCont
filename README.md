@@ -18,7 +18,7 @@ Os Slides originais estão na pasta [`Slides`](https://github.com/rtheodoro/RCC0
 
 Os Códigos estão na pasta [`Codigo`](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/tree/main/Codigo).
 
-Na pasta [`Aula-RCC0219`](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/tree/main/Aula-RCC0219) estão os arquivos utilizados na aula prática, inclusive exercícios de treino.
+Na pasta [`Aula-RCC0219`](https://github.com/rtheodoro/RCC0219-ProbEstAplCont/tree/main/Aula-RCC0219) estão os arquivos utilizados na aula prática, inclusive exercícios de treino. 
 
 ## Referências
 
